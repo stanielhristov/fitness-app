@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Registration</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+<header th:replace="fragments/commons::header"></header>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <h2 class="text-center">Staniel Fitness Registration</h2>
+      <form th:action="@{/register}" method="post">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" th:name="username" class="form-control" id="username" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" th:name="email" class="form-control" id="email" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" th:name="password" class="form-control" id="password" required>
+        </div>
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input type="password" th:name="confirmPassword" class="form-control" id="confirmPassword" required>
+        </div>
+        <div class="form-group">
+          <label for="gender">Gender</label>
+          <select th:name="gender" class="form-control" id="gender" required>
+            <option value="">Select...</option>
+            <option value="MALE">Male</option>
+            <option value="FEMALE">Female</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="height">Height</label>
+          <input type="number" th:name="height" class="form-control" id="height" required>
+        </div>
+        <div class="form-group">
+          <label for="weight">Weight</label>
+          <input type="number" th:name="weight" class="form-control" id="weight" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Register</button>
+      </form>
+    </div>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<footer th:replace="fragments/commons::footer"></footer>
+</body>
+</html>

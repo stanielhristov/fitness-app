@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>Update Workout Log</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<header th:replace="fragments/commons::header"></header>
+<div class="container">
+  <h2 class="mt-5">Update Workout Log</h2>
+  <form action="#" th:action="@{/workoutlogs/update/{id}(id=${workoutLogDTO.id})}" method="post">
+<!--    <input type="hidden" th:field="${workoutLogDTO.id}" />-->
+    <!-- Add other form fields here -->
+    <div class="form-group">
+      <label for="date">Date:</label>
+      <input type="date" class="form-control" id="date" th:name="date" th:value="${workoutLogDTO.date}" required />
+    </div>
+    <div class="form-group">
+      <label for="time">Time:</label>
+      <input type="time" class="form-control" id="time" th:name="time" th:value="${workoutLogDTO.time}" required />
+    </div>
+    <div class="form-group">
+      <label for="notes">Notes:</label>
+      <textarea class="form-control" id="notes" th:name="notes" th:value="${workoutLogDTO.notes}" required></textarea>
+    </div>
+    <div class="form-group form-check">
+      <input type="checkbox" class="form-check-input" id="completed" th:name="isCompleted" th:value="${workoutLogDTO.completed}" />
+      <label class="form-check-label" for="completed">Completed</label>
+    </div>
+
+
+      <button type="submit" class="btn btn-primary">Update</button>
+  </form>
+</div>
+<footer th:replace="fragments/commons::footer"></footer>
+<script>
+    var isCompleted = document.getElementById("completed").checked;
+</script>
+</body>
+
+</html>

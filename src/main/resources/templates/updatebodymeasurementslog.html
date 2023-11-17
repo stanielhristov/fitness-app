@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Update Body Measurements Log</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<header th:replace="fragments/commons::header"></header>
+<div class="container">
+    <h2 class="mt-5">Update Measurements Log</h2>
+    <form action="#" th:action="@{/bodymeasurementslogs/update/{id}(id=${bodyMeasurementsLogDTO.id})}" method="post">
+        <div class="form-group">
+            <label for="date">Date</label>
+            <input type="date" class="form-control" id="date" th:name="date" th:value="${bodyMeasurementsLogDTO.date}">
+        </div>
+        <div class="form-group">
+            <label for="bodyPart">Body Part</label>
+            <input type="text" class="form-control" id="bodyPart" th:name="bodyPart" th:value="${bodyMeasurementsLogDTO.bodyPart}">
+        </div>
+        <div class="form-group">
+            <label for="size">Size</label>
+            <input type="number" class="form-control" id="size" th:name="size" th:value="${bodyMeasurementsLogDTO.size}">
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+</div>
+<footer th:replace="fragments/commons::footer"></footer>
+</body>
+</html>

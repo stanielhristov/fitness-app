@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Progress Photo</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h2>Add Progress Photo</h2>
+    <form action="#" th:action="@{/addprogressphoto}" th:object="${progressPhotoDTO}" method="post">
+        <div class="form-group">
+            <label for="userId">User ID:</label>
+            <input type="text" class="form-control" id="userId" th:field="*{userId}">
+        </div>
+        <div class="form-group">
+            <label for="date">Date:</label>
+            <input type="date" class="form-control" id="date" th:field="*{date}">
+        </div>
+        <div class="form-group">
+            <label for="imageFile">Image File:</label>
+            <input type="text" class="form-control" id="imageFile" th:field="*{imageFile}">
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea class="form-control" id="description" th:field="*{description}"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Photo</button>
+    </form>
+</div>
+</body>
+</html>
