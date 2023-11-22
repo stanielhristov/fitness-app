@@ -32,7 +32,7 @@ public class SecurityConfiguration {
                                 // All static resources which are situated in js, images, css are available for anyone
                                 .requestMatchers(String.valueOf(PathRequest.toStaticResources().atCommonLocations())).permitAll()
                                 // Allow anyone to see the home page, the registration page and the login form
-                                .requestMatchers("/", "/login", "/register", "/logout", "/resources/**", "/css/**", "/js/**", "/images/**", "/webjars/**", "/favicon.*", "/*/icon-*").permitAll()
+                                .requestMatchers("/", "/login", "/login/error", "/register", "/logout", "/resources/**", "/css/**", "/js/**", "/images/**", "/webjars/**", "/favicon.*", "/*/icon-*").permitAll()
                                 .requestMatchers("/error").permitAll()
                                 // all other requests are authenticated.
                                 .anyRequest().authenticated()
@@ -45,8 +45,8 @@ public class SecurityConfiguration {
                                     // The names of the input fields (in our case in auth-login.html)
                                     .usernameParameter("username")
                                     .passwordParameter("password")
-                                    .defaultSuccessUrl("/")
-                                    .failureForwardUrl("/login");
+                                    .defaultSuccessUrl("/homepage");
+//                                    .failureForwardUrl("/login/error");
                         }
                 ).csrf(AbstractHttpConfigurer::disable)
                 .logout(
@@ -55,7 +55,7 @@ public class SecurityConfiguration {
                                     // the URL where we should POST something in order to perform the logout
                                     .logoutUrl("/logout")
                                     // where to go when logged out?
-                                    .logoutSuccessUrl("/")
+                                    .logoutSuccessUrl("/login")
                                     // invalidate the HTTP session
                                     .invalidateHttpSession(true);
                         }

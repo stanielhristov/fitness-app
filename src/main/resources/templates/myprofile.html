@@ -29,6 +29,9 @@
     <div class="row">
       <div class="col-md-6 offset-md-3">
         <ul class="list-group" th:object="${profile}">
+          <li class="list-group-item">Username: <span th:text="${profile.user}"></span></li>
+          <li class="list-group-item">Email: <span th:text="${profile.email}"></span></li>
+          <li class="list-group-item">Gender: <span th:text="${profile.gender}"></span></li>
           <li class="list-group-item">Height: <span th:text="${profile.height}"></span> cm</li>
           <li class="list-group-item">Weight: <span th:text="${profile.weight}"></span> kg</li>
           <li class="list-group-item">BMI: <span th:text="${profile.BMI}"></span></li>
@@ -43,7 +46,7 @@
 
     <!-- Edit Profile Button -->
     <div class="text-center mt-4">
-      <a class="btn btn-primary" href="#" role="button">Edit Profile</a>
+      <a class="btn btn-primary" th:href="@{/myprofile/edit/{id}(id=${profile.id})}" role="button">Edit Profile</a>
     </div>
   </div>
 </div>

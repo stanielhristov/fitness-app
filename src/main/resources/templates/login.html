@@ -15,11 +15,14 @@
             <form th:action="@{/login}" method="post">
                 <div class="form-group">
                     <label for="username">Username</label>
-                    <input type="text" th:name="username" class="form-control" id="username" required>
+                    <input type="text" th:name="username" th:value="${username}" class="form-control" id="username" required>
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input type="password" th:name="password" class="form-control" id="password" required>
+                </div>
+                <div th:if="${param.error != null}"  class="alert alert-danger">
+                    Wrong password or username
                 </div>
                 <button type="submit" class="btn btn-primary">Login</button>
             </form>

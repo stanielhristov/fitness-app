@@ -55,7 +55,7 @@ public class ChallengeServiceImpl implements ChallengeService {
             return modelMapper.map(existingChallenge, ChallengeDTO.class);
         }
 
-        return null; // Challenge with the given ID not found
+        return null;
     }
 
     @Override

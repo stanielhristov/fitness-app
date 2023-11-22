@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/body-measurements")
+//TODO Delete
 public class BodyMeasurementsController {
 
     private final BodyMeasurementsService bodyMeasurementsService;

@@ -6,6 +6,7 @@ import com.example.individualprojectstaniel.repository.BodyMeasurementsLogReposi
 import com.example.individualprojectstaniel.service.BodyMeasurementsLogService;
 import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,12 +26,9 @@ public class BodyMeasurementsLogServiceImpl implements BodyMeasurementsLogServic
     public List<BodyMeasurementsLogDTO> getAllBodyMeasurementsLogs() {
         List<BodyMeasurementsLogEntity> bodyMeasurementsLogEntities = bodyMeasurementsLogRepository.findAll();
 
-        List<BodyMeasurementsLogDTO> bodyMeasurementsLogDTOS = bodyMeasurementsLogEntities.stream()
+        return bodyMeasurementsLogEntities.stream()
                 .map(entity -> modelMapper.map(entity, BodyMeasurementsLogDTO.class))
                 .collect(Collectors.toList());
-
-
-        return bodyMeasurementsLogDTOS;
     }
 
     @Override
@@ -47,6 +45,18 @@ public class BodyMeasurementsLogServiceImpl implements BodyMeasurementsLogServic
     }
 
     @Override
+    public List<BodyMeasurementsLogDTO> getAllBodyMeasurementsLogsByUserId(Long userId) {
+        List<BodyMeasurementsLogEntity> bodyMeasurementsLogEntities = bodyMeasurementsLogRepository.findByUserId(userId);
+
+
+        List<BodyMeasurementsLogDTO> bodyMeasurementsLogDTOS = bodyMeasurementsLogEntities.stream()
+                .map(entity -> modelMapper.map(entity, BodyMeasurementsLogDTO.class))
+                .collect(Collectors.toList());
+
+        return bodyMeasurementsLogDTOS;
+    }
+
+    @Override
     public BodyMeasurementsLogDTO createBodyMeasurementsLog(BodyMeasurementsLogDTO bodyMeasurementsLogDTO) {
         BodyMeasurementsLogEntity bodyMeasurementsLogEntity = modelMapper.map(bodyMeasurementsLogDTO, BodyMeasurementsLogEntity.class);
 
@@ -55,7 +65,7 @@ public class BodyMeasurementsLogServiceImpl implements BodyMeasurementsLogServic
         return modelMapper.map(bodyMeasurementsLogEntity, BodyMeasurementsLogDTO.class);
     }
     @Override
-    public BodyMeasurementsLogDTO updateBodyMeasurementsLog(Long id, BodyMeasurementsLogDTO bodyMeasurementsLogDTO) {
+    public BodyMeasurementsLogDTO updateBodyMeasurementsLog(Long id, BodyMeasurementsLogDTO bodyMeasurementsLogDTO, Authentication auth) {
         BodyMeasurementsLogEntity existingBodyMeasurementsLogEntity = bodyMeasurementsLogRepository.findById(id)
                 .orElse(null);
 

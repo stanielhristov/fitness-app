@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface NutritionLogService {
     List<NutritionLogDTO> getAllNutritionLogs();
+    List<NutritionLogDTO> getAllNutritionLogsByUserId(Long userId);
 
     NutritionLogDTO getNutritionLogById(Long id);
 

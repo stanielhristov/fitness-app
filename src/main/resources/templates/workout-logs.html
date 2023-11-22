@@ -46,20 +46,12 @@
                     Delete
                 </button>
                 <form th:action="@{/workoutlogs/{id}(id=${log.id})}" method="get" style="display: inline;" id="updateForm">
-<!--                    <div class="btn-group btn-group-toggle" data-toggle="buttons">-->
-<!--                        <label class="btn btn-outline-primary active">-->
-<!--                            <input type="radio" name="action" value="update" id="update" checked> Update-->
-<!--                        </label>-->
-<!--                        <label class="btn btn-outline-danger">-->
-<!--                            <input type="radio" name="action" value="delete" id="delete"> Delete-->
-<!--                        </label>-->
-<!--                    </div>-->
+
                     <a th:href="@{/workoutlogs/update/{id}(id=${log.id})}">
                         <button type="button" class="btn btn-primary mt-2 btn-action">
                             Update
                         </button>
                     </a>
-<!--                    <button type="submit" class="btn btn-primary mt-2">Submit</button>-->
                 </form>
             </td>
         </tr>

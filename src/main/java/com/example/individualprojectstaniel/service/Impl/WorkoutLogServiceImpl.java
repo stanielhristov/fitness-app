@@ -59,6 +59,18 @@ public class WorkoutLogServiceImpl implements WorkoutLogService {
     }
 
     @Override
+    public List<WorkoutLogDTO> getAllWorkoutLogsByUserId(Long userId) {
+        List<WorkoutLogEntity> workoutLogEntities = workoutLogRepository.findByUserId(userId);
+
+
+        List<WorkoutLogDTO> workoutLogDTOS = workoutLogEntities.stream()
+                .map(entity -> modelMapper.map(entity, WorkoutLogDTO.class))
+                .collect(Collectors.toList());
+
+        return workoutLogDTOS;
+    }
+
+    @Override
     public WorkoutLogDTO updateWorkoutLog(Long id, WorkoutLogDTO updatedWorkoutLogDTO) {
         WorkoutLogEntity existingWorkoutLog = workoutLogRepository.findById(id).orElse(null);
 

@@ -34,6 +34,17 @@ public class NutritionLogServiceImpl implements NutritionLogService {
     }
 
     @Override
+    public List<NutritionLogDTO> getAllNutritionLogsByUserId(Long userId) {
+        List<NutritionLogEntity> nutritionLogEntities = nutritionLogRepository.findByUserId(userId);
+
+        List<NutritionLogDTO> nutritionLogDTOS = nutritionLogEntities.stream()
+                .map(entity -> modelMapper.map(entity, NutritionLogDTO.class))
+                .collect(Collectors.toList());
+
+        return nutritionLogDTOS;
+    }
+
+    @Override
     public NutritionLogDTO getNutritionLogById(Long id) {
         NutritionLogEntity nutritionLogEntity = nutritionLogRepository.findById(id)
                 .orElse(null);

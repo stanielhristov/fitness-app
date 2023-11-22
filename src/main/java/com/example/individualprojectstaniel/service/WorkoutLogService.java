@@ -9,6 +9,10 @@ public interface WorkoutLogService {
     WorkoutLogDTO createWorkoutLog(WorkoutLogDTO workoutLogDTO);
     WorkoutLogDTO getWorkoutLogById(Long id);
     List<WorkoutLogDTO> getAllWorkoutLogs();
+
+
+    List<WorkoutLogDTO> getAllWorkoutLogsByUserId(Long userId);
+
     WorkoutLogDTO updateWorkoutLog(Long id, WorkoutLogDTO updatedWorkoutLogDTO);
     void deleteWorkoutLog(Long id);
 

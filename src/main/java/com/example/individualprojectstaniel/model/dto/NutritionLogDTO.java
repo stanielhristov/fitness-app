@@ -1,6 +1,5 @@
 package com.example.individualprojectstaniel.model.dto;
 
-import com.example.individualprojectstaniel.model.entity.NutritionLogEntity;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
@@ -9,6 +8,8 @@ import java.time.LocalTime;
 
 public class NutritionLogDTO {
     private Long id;
+    private Long userId;
+
     private String mealDetails;
     private int calories;
     private double protein;
@@ -29,6 +30,14 @@ public class NutritionLogDTO {
         this.carbohydrates = carbohydrates;
         this.date = date;
         this.time = time;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public int getCalories() {

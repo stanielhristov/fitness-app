@@ -6,24 +6,33 @@ import java.time.LocalTime;
 
 public class WorkoutLogDTO {
     private Long id;
-    //private WorkoutEntity workout;
+    private Long userId;
+
+
     private LocalDate date;
     private LocalTime time;
     private String notes;
-    private boolean isCompleted;
+    private boolean completed;
 
     public WorkoutLogDTO() {
     }
 
-    public WorkoutLogDTO(Long id, LocalDate date, LocalTime time, String notes, boolean isCompleted) {
+    public WorkoutLogDTO(Long id, LocalDate date, LocalTime time, String notes, boolean completed) {
         this.id = id;
         //this.workout = workout;
         this.date = date;
         this.time = time;
         this.notes = notes;
-        this.isCompleted = isCompleted;
+        this.completed = completed;
     }
 
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
     public Long getId() {
         return id;
     }
@@ -31,14 +40,6 @@ public class WorkoutLogDTO {
     public void setId(Long id) {
         this.id = id;
     }
-
-//    public WorkoutEntity getWorkout() {
-//        return workout;
-//    }
-//
-//    public void setWorkout(WorkoutEntity workout) {
-//        this.workout = workout;
-//    }
 
     public LocalDate getDate() {
         return date;
@@ -65,10 +66,10 @@ public class WorkoutLogDTO {
     }
 
     public boolean isCompleted() {
-        return isCompleted;
+        return completed;
     }
 
-    public void setCompleted(boolean completed) {
-        isCompleted = completed;
+    public void setCompleted(Boolean completed) {
+        this.completed = completed;
     }
 }

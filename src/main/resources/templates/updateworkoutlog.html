@@ -25,12 +25,24 @@
     </div>
     <div class="form-group">
       <label for="notes">Notes:</label>
-      <textarea class="form-control" id="notes" th:name="notes" th:value="${workoutLogDTO.notes}" required></textarea>
+      <textarea class="form-control" id="notes" th:name="notes" th:field="${workoutLogDTO.notes}" required></textarea>
     </div>
-    <div class="form-group form-check">
-      <input type="checkbox" class="form-check-input" id="completed" th:name="isCompleted" th:value="${workoutLogDTO.completed}" />
-      <label class="form-check-label" for="completed">Completed</label>
-    </div>
+<!--    <div class="form-group form-check">-->
+<!--      <input type="checkbox" class="form-check-input" id="completed" th:name="isCompleted" th:value="${workoutLogDTO.completed}" />-->
+<!--      <label class="form-check-label" for="completed">Completed</label>-->
+<!--    </div>-->
+
+<!--      <div class="form-group form-check">-->
+<!--          <input type="checkbox" class="form-check-input" id="completed" th:name="isCompleted" th:checked="${workoutLogDTO.isCompleted}" />-->
+<!--          <label class="form-check-label" for="completed">Completed</label>-->
+<!--      </div>-->
+
+      <div class="form-group form-check">
+          <input type="checkbox" class="form-check-input" id="completed" th:name="completed" th:field="${workoutLogDTO.completed}" th:checked="${workoutLogDTO.completed}" value="true" />
+          <label class="form-check-label" for="completed">Completed</label>
+      </div>
+
+
 
 
       <button type="submit" class="btn btn-primary">Update</button>
@@ -38,7 +50,18 @@
 </div>
 <footer th:replace="fragments/commons::footer"></footer>
 <script>
-    var isCompleted = document.getElementById("completed").checked;
+    // $('#completed').text($('#checkbox1').val());
+
+    // $("#completed").on('change', function() {
+    //     console.log($(this).is(':checked'))
+    //     if ($(this).is(':checked')) {
+    //         $(this).attr('value', true);
+    //     } else {
+    //         $(this).attr('value', false);
+    //     }
+
+        // $('#checkbox-value').text($('#checkbox1').val());
+    // });
 </script>
 </body>
 
