@@ -1,68 +1,36 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
-  <title>Update Workout Log</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <title>Update Workout Log</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
-
 <body>
 <header th:replace="fragments/commons::header"></header>
 <div class="container">
-  <h2 class="mt-5">Update Workout Log</h2>
-  <form action="#" th:action="@{/workoutlogs/update/{id}(id=${workoutLogDTO.id})}" method="post">
-<!--    <input type="hidden" th:field="${workoutLogDTO.id}" />-->
-    <!-- Add other form fields here -->
-    <div class="form-group">
-      <label for="date">Date:</label>
-      <input type="date" class="form-control" id="date" th:name="date" th:value="${workoutLogDTO.date}" required />
-    </div>
-    <div class="form-group">
-      <label for="time">Time:</label>
-      <input type="time" class="form-control" id="time" th:name="time" th:value="${workoutLogDTO.time}" required />
-    </div>
-    <div class="form-group">
-      <label for="notes">Notes:</label>
-      <textarea class="form-control" id="notes" th:name="notes" th:field="${workoutLogDTO.notes}" required></textarea>
-    </div>
-<!--    <div class="form-group form-check">-->
-<!--      <input type="checkbox" class="form-check-input" id="completed" th:name="isCompleted" th:value="${workoutLogDTO.completed}" />-->
-<!--      <label class="form-check-label" for="completed">Completed</label>-->
-<!--    </div>-->
-
-<!--      <div class="form-group form-check">-->
-<!--          <input type="checkbox" class="form-check-input" id="completed" th:name="isCompleted" th:checked="${workoutLogDTO.isCompleted}" />-->
-<!--          <label class="form-check-label" for="completed">Completed</label>-->
-<!--      </div>-->
-
-      <div class="form-group form-check">
-          <input type="checkbox" class="form-check-input" id="completed" th:name="completed" th:field="${workoutLogDTO.completed}" th:checked="${workoutLogDTO.completed}" value="true" />
-          <label class="form-check-label" for="completed">Completed</label>
-      </div>
-
-
-
-
-      <button type="submit" class="btn btn-primary">Update</button>
-  </form>
+    <h2 class="mt-5">Update Workout Log</h2>
+    <form action="#" th:action="@{/workoutlogs/update/{id}(id=${workoutLogDTO.id})}" method="post">
+        <div class="form-group">
+            <label for="date"><div class="icon-text"><i class="fas fa-calendar-alt fa-icon"></i> Date:</div></label>
+            <input type="date" class="form-control" id="date" th:name="date" th:value="${workoutLogDTO.date}" required />
+        </div>
+        <div class="form-group">
+            <label for="time"><div class="icon-text"><i class="fas fa-clock fa-icon"></i> Time:</div></label>
+            <input type="time" class="form-control" id="time" th:name="time" th:value="${workoutLogDTO.time}" required />
+        </div>
+        <div class="form-group">
+            <label for="notes"><div class="icon-text"><i class="fas fa-sticky-note fa-icon"></i> Notes:</div></label>
+            <textarea class="form-control" id="notes" th:name="notes" th:field="${workoutLogDTO.notes}" required></textarea>
+        </div>
+        <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="completed" th:name="completed" th:field="${workoutLogDTO.completed}" th:checked="${workoutLogDTO.completed}" value="true" />
+            <label class="form-check-label" for="completed"><div class="icon-text"><i class="fas fa-check-square fa-icon"></i> Completed</div></label>
+        </div>
+        <button type="submit" class="btn btn-primary"><i class="fas fa-edit fa-icon"></i> Update</button>
+    </form>
 </div>
 <footer th:replace="fragments/commons::footer"></footer>
-<script>
-    // $('#completed').text($('#checkbox1').val());
-
-    // $("#completed").on('change', function() {
-    //     console.log($(this).is(':checked'))
-    //     if ($(this).is(':checked')) {
-    //         $(this).attr('value', true);
-    //     } else {
-    //         $(this).attr('value', false);
-    //     }
-
-        // $('#checkbox-value').text($('#checkbox1').val());
-    // });
-</script>
 </body>
-
 </html>

@@ -1,4 +1,15 @@
 spring:
+  mail:
+    host: localhost
+    port: 8080
+    username: ${fitness.email}
+    password: ${fitness.password}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
   jpa:
     properties:
       hibernate:
@@ -11,7 +22,6 @@ spring:
     hiddenmethod:
       filter:
         enabled: 'true'
-
 
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
@@ -44,6 +54,24 @@ individualprojectstaniel:
   remember:
     me:
       key: mySecretKey
+
+
+
+#                  spring.profiles.active=@active.mode@
+#                  spring.data.mongodb.database=karaoke-db
+#                  server.port=5813
+#                  base.host=@base.host@
+#
+#                  spring.mail.host=smtp.gmail.com
+#                  spring.mail.port=587
+#                  spring.mail.username=yourEmail@gmail.com
+#                  spring.mail.password=yourEmailPassword
+#                  mail.transport.protocol=smtp
+#                  spring.mail.properties.mail.smtp.auth=true
+#                  spring.mail.properties.mail.smtp.starttls.enable=true
+#                  mail.from.email=yourEmail@gmail.com
+#                  mail.debug=true
+
 #After 3 years of frustation here is a solution for a working HOT SWAP:
 #
 #  https://attacomsian.com/blog/spring-boot-auto-reload-thymeleaf-templates

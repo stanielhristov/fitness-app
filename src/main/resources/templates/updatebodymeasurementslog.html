@@ -1,31 +1,103 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Body Measurements Log</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
+    <style>
+        body {
+            background-color: #fff;
+            color: #000;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            color: #fff;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+        .fa {
+            margin-right: 5px;
+        }
+
+        input[type="date"],
+        input[type="text"],
+        input[type="number"] {
+            border: 1px solid #007bff;
+            border-radius: 0.25rem;
+            padding: 0.375rem 0.75rem;
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+
+        input[type="date"]:focus,
+        input[type="text"]:focus,
+        input[type="number"]:focus {
+            border-color: #0056b3;
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+    </style>
 </head>
 <body>
+
 <header th:replace="fragments/commons::header"></header>
+
 <div class="container">
-    <h2 class="mt-5">Update Measurements Log</h2>
+    <h2 class="mt-5"><i class="fas fa-edit"></i> Update Measurements Log</h2>
+
     <form action="#" th:action="@{/bodymeasurementslogs/update/{id}(id=${bodyMeasurementsLogDTO.id})}" method="post">
         <div class="form-group">
-            <label for="date">Date</label>
+            <label for="date"><i class="far fa-calendar-alt"></i> Date:</label>
             <input type="date" class="form-control" id="date" th:name="date" th:value="${bodyMeasurementsLogDTO.date}">
         </div>
+
         <div class="form-group">
-            <label for="bodyPart">Body Part</label>
+            <label for="bodyPart"><i class="fas fa-body"></i> Body Part:</label>
             <input type="text" class="form-control" id="bodyPart" th:name="bodyPart" th:value="${bodyMeasurementsLogDTO.bodyPart}">
         </div>
+
         <div class="form-group">
-            <label for="size">Size (in cm)</label>
+            <label for="size"><i class="fas fa-ruler-horizontal"></i> Size (in cm):</label>
             <input type="number" class="form-control" id="size" th:name="size" th:value="${bodyMeasurementsLogDTO.size}">
         </div>
-        <button type="submit" class="btn btn-primary">Update</button>
+
+        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Update</button>
     </form>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"></script>
+
+
+<script>
+</script>
+
 <footer th:replace="fragments/commons::footer"></footer>
 </body>
 </html>

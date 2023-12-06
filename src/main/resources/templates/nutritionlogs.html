@@ -1,110 +1,153 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <title>Nutrition Log</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <style>
         .btn-action {
-            width: 100px;
+            width: 120px;
             margin-right: 10px;
         }
 
         .btn-delete {
-            background-color: red;
-            border-color: red;
+            background-color: #dc3545;
+            border-color: #dc3545;
+            color: #fff;
+        }
+
+        .btn-update {
+            background-color: #007bff;
+            border-color: #007bff;
+            color: #fff;
+        }
+
+        .fa-icon {
+            margin-right: 5px;
+        }
+
+        .page-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+
+        .page-title i {
+            font-size: 2.5em;
+        }
+
+        .page-title h2 {
+            margin-bottom: 0;
+            margin-left: 10px;
+            font-size: 2em;
+        }
+
+        .icon-text {
+            display: flex;
+            align-items: center;
+        }
+
+        .icon-text i {
+            margin-right: 5px;
         }
     </style>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
-
 <body>
-<header th:replace="~{fragments/commons::header}"></header>
+<header th:replace="fragments/commons::header"></header>
 <div class="container">
-    <h2 class="mt-5">Nutrition Log</h2>
+    <div class="page-title">
+        <i class="fas fa-utensils fa-icon"></i>
+        <h2 class="mt-5">Nutrition Log</h2>
+    </div>
     <a href="nutritionlogs/create">
-        <button type="button" class="btn btn-primary mb-3">Add Nutrition</button>
+        <button type="button" class="btn btn-primary mb-3"><i class="fas fa-plus fa-icon"></i> Add Nutrition</button>
     </a>
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>Meal Details</th>
-            <th>Calories</th>
-            <th>Protein</th>
-            <th>Fat</th>
-            <th>Carbohydrates</th>
-            <th>Date</th>
-            <th>Time</th>
+            <th><div class="icon-text"><i class="fas fa-utensils fa-icon"></i> Meal Details</div></th>
+            <th><div class="icon-text"><i class="fas fa-fire fa-icon"></i> Calories</div></th>
+            <th><div class="icon-text"><i class="fas fa-dumbbell fa-icon"></i> Protein</div></th>
+            <th><div class="icon-text"><i class="fas fa-bacon fa-icon"></i> Fat</div></th>
+            <th><div class="icon-text"><i class="fas fa-carrot fa-icon"></i> Carbohydrates</div></th>
+            <th><div class="icon-text"><i class="fas fa-calendar-alt fa-icon"></i> Date</div></th>
+            <th><div class="icon-text"><i class="fas fa-clock fa-icon"></i> Time</div></th>
             <th>Action</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="log : ${nutritionlogs}">
-            <td th:text="${log.mealDetails}"></td>
-            <td th:text="${log.calories}"></td>
-            <td th:text="${log.protein}"></td>
-            <td th:text="${log.fat}"></td>
-            <td th:text="${log.carbohydrates}"></td>
-            <td th:text="${log.date}"></td>
-            <td th:text="${log.time}"></td>
+            <td><div class="icon-text"><i class="fas fa-utensils fa-icon"></i> <span th:text="${log.mealDetails}"></span></div></td>
+            <td><div class="icon-text"><i class="fas fa-fire fa-icon"></i> <span th:text="${log.calories}"></span></div></td>
+            <td><div class="icon-text"><i class="fas fa-dumbbell fa-icon"></i> <span th:text="${log.protein}"></span></div></td>
+            <td><div class="icon-text"><i class="fas fa-bacon fa-icon"></i> <span th:text="${log.fat}"></span></div></td>
+            <td><div class="icon-text"><i class="fas fa-carrot fa-icon"></i> <span th:text="${log.carbohydrates}"></span></div></td>
+            <td><div class="icon-text"><i class="fas fa-calendar-alt fa-icon"></i> <span th:text="${log.date}"></span></div></td>
+            <td><div class="icon-text"><i class="fas fa-clock fa-icon"></i> <span th:text="${log.time}"></span></div></td>
             <td>
-                <button type="button" class="btn btn-primary mt-2 btn-action btn-delete" th:data="${log.id}">
-                    Delete
+                <button type="button" class="btn btn-danger mt-2 btn-action btn-delete" th:data="${log.id}">
+                    <i class="fas fa-trash fa-icon"></i> Delete
                 </button>
                 <form th:action="@{/nutritionlogs/{id}(id=${log.id})}" method="get" style="display: inline;" id="updateForm">
-                    <!-- Add your form fields here -->
                     <a th:href="@{/nutritionlogs/update/{id}(id=${log.id})}">
-                        <button type="button" class="btn btn-primary mt-2 btn-action">
-                            Update
+                        <button type="button" class="btn btn-primary mt-2 btn-action btn-update">
+                            <i class="fas fa-edit fa-icon"></i> Update
                         </button>
                     </a>
-
                 </form>
             </td>
         </tr>
         </tbody>
     </table>
 </div>
-<script>
-    // function submitUpdateForm() {
-    //     var id = document.getElementById('updateForm').getAttribute('action').split("/")[2];
-    //     fetch('/nutritionlogs/' + id, {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/x-www-form-urlencoded',
-    //         },
-    //         body: new URLSearchParams(new FormData(document.getElementById('updateForm'))),
-    //     })
-    //         .then(response => {
-    //             return response.json();
-    //         })
-    //         .then(data => {
-    //             window.location.href = '/nutritionlogs';
-    //         })
-    //         .catch((error) => {
-    //             console.error('Error:', error);
-    //         });
-    // }
 
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmDeleteModalLabel">Confirm Delete</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this nutrition log?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
     document.querySelectorAll('.btn-delete').forEach(function (button) {
         button.addEventListener('click', function () {
+            $('#confirmDeleteModal').modal('show');
             var id = this.getAttribute('data');
-            fetch('/nutritionlogs/' + id, {
-                method: 'DELETE',
-            })
-                .then(response => {
-                    return response.json();
+            $('#confirmDeleteBtn').on('click', function () {
+                fetch('/nutritionlogs/' + id, {
+                    method: 'DELETE',
                 })
-                .then(data => {
-                    window.location.href = '/nutritionlogs';
-                })
-                .catch((error) => {
-                    console.error('Error:', error);
-                });
+                    .then(response => {
+                        return response.json();
+                    })
+                    .then(data => {
+                        window.location.href = '/nutritionlogs';
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                    });
+            });
         });
     });
 </script>
-<footer th:replace="~{fragments/commons::footer}"></footer>
+
+<footer th:replace="fragments/commons::footer"></footer>
 </body>
 </html>

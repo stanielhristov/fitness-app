@@ -3,27 +3,44 @@
 <head>
   <title>BMI Calculator</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+  <style>
+    .result {
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background-color: #f8f9fa;
+    }
+
+    .icon {
+      margin-right: 5px;
+    }
+  </style>
 </head>
 <body>
 <header th:replace="fragments/commons::header"></header>
 <div class="container">
-  <h2>BMI Calculator</h2>
+  <h2 class="mt-5"><i class="fas fa-calculator icon"></i>BMI Calculator</h2>
   <form action="#" th:action="@{/bmicalculator}" th:object="${bmi}" method="post">
-    <div class="form-group">
-      <label for="height">Height (in cm):</label>
-      <input type="number" class="form-control" id="height" th:name="height" required>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="height"><i class="fas fa-arrows-alt-v icon"></i>Height (in cm):</label>
+        <input type="number" class="form-control" id="height" th:name="height" required>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="weight"><i class="fas fa-weight icon"></i>Weight (in kg):</label>
+        <input type="number" class="form-control" id="weight" th:name="weight" required>
+      </div>
     </div>
-    <div class="form-group">
-      <label for="weight">Weight (in kg):</label>
-      <input type="number" class="form-control" id="weight" th:name="weight" required>
-    </div>
-    <button type="submit" class="btn btn-primary">Calculate BMI</button>
+    <button type="submit" class="btn btn-primary"><i class="fas fa-calculator icon"></i>Calculate BMI</button>
   </form>
-  <div th:if="${errorMessage != null}">
-    <p>Wrong input: <span th:text="${errorMessage}"></span></p>
+  <div th:if="${errorMessage != null}" class="alert alert-danger mt-3">
+    <p><strong>Error:</strong> <span th:text="${errorMessage}"></span></p>
   </div>
-  <div th:if="${bmi != null}">
-    <h3>Your BMI is: <span th:text="${bmi}"></span></h3>
+  <div th:if="${bmi != null}" class="result mt-3">
+    <h3><i class="fas fa-heartbeat icon"></i>Your BMI is: <span th:text="${bmi}"></span></h3>
+    <p><i class="fas fa-chart-pie icon"></i>Category: <span th:text="${bmiCategory}"></span></p>
   </div>
 </div>
 <footer th:replace="fragments/commons::footer"></footer>

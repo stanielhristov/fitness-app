@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel</title>
+
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
+  <style>
+    .btn-delete {
+      background-color: red;
+      border-color: red;
+    }
+
+    .btn-space {
+      margin-right: 5px;
+    }
+
+    .icon {
+      margin-right: 5px;
+    }
+
+    .icon-text {
+      display: flex;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+
+<header th:replace="fragments/commons::header"></header>
+
+<div class="container mt-4">
+  <div class="jumbotron">
+    <h1 class="display-4 text-center"><i class="fas fa-cogs icon"></i>Admin Panel</h1>
+
+    <table class="table">
+      <thead>
+      <tr>
+        <th><div class="icon-text"><i class="fas fa-id-card icon"></i>ID</div></th>
+        <th><div class="icon-text"><i class="fas fa-user icon"></i>Username</div></th>
+        <th><div class="icon-text"><i class="fas fa-envelope icon"></i>Email</div></th>
+        <th><div class="icon-text"><i class="fas fa-venus-mars icon"></i>Gender</div></th>
+        <th><div class="icon-text"><i class="fas fa-arrows-alt-v icon"></i>Height (cm)</div></th>
+        <th><div class="icon-text"><i class="fas fa-weight icon"></i>Weight (kg)</div></th>
+        <th><div class="icon-text"><i class="fas fa-user-tag icon"></i>Role</div></th>
+        <th><div class="icon-text"><i class="fas fa-cogs icon"></i>Actions</div></th>
+      </tr>
+      </thead>
+      <tbody>
+
+      <tr th:each="user : ${users}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.username}"></td>
+        <td th:text="${user.email}"></td>
+        <td th:text="${user.gender}"></td>
+        <td th:text="${user.height}"></td>
+        <td th:text="${user.weight}"></td>
+        <td th:text="${user.role}"></td>
+        <td>
+
+          <button type="button" class="btn btn-danger btn-delete btn-space" th:data="${user.id}">
+            <div class="icon-text"><i class="fas fa-trash icon"></i>Delete User</div>
+          </button>
+          <a class="btn btn-primary btn-space" th:href="@{/adminpanel/changerole/{id}(id=${user.id})}" role="button">
+            <div class="icon-text"><i class="fas fa-user-cog icon"></i>Change Role</div>
+          </a>
+          <form th:action="@{/adminpanel/{id}(id=${user.id})}" method="get" style="display: inline;" id="updateForm">
+          </form>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<script>
+  document.querySelectorAll('.btn-delete').forEach(function (button) {
+    button.addEventListener('click', function (event) {
+      event.stopPropagation();
+      var id = this.getAttribute('data');
+      var confirmDelete = confirm('Are you sure you want to delete user with ID: ' + id + '?');
+      if (confirmDelete) {
+        fetch('/adminpanel/' + id, {
+          method: 'DELETE',
+        })
+                .then(response => {
+                  return response.json();
+                })
+                .then(data => {
+                  window.location.href = '/adminpanel';
+                })
+                .catch((error) => {
+                  console.error('Error:', error);
+                });
+      }
+    });
+  });
+</script>
+
+<footer th:replace="fragments/commons::footer"></footer>
+</body>
+</html>

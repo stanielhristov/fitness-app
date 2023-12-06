@@ -25,6 +25,10 @@
             bottom: 0;
             width: 100%;
         }
+
+        .navbar-nav .nav-item:hover {
+            background-color: #e9ecef;
+        }
     </style>
 </head>
 <body class="d-flex flex-column">
@@ -60,18 +64,21 @@
                 <li class="nav-item" th:if="${#authorization.expression('isAuthenticated()')}">
                     <a class="nav-link" href="#" th:href="@{/bmicalculator}">BMI Calculator</a>
                 </li>
+
+                <li class="nav-item" th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+                    <a class="nav-link" href="#" th:href="@{/adminpanel}">Admin Panel</a>
+                </li>
+
                 <li class="nav-item" th:if="${#authorization.expression('isAuthenticated()')}">
                     <form th:action="@{/logout}" method="post">
                         <button type="submit" class="nav-link btn btn-link">Logout</button>
                     </form>
                 </li>
-
             </ul>
         </div>
     </div>
 </header>
 <div class="content">
-    <!-- your main content goes here -->
 </div>
 <footer class="footer fixed-bottom py-3 bg-light text-center">
     <div class="container">
@@ -86,5 +93,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyAYBhBcHfQTnFOtkI9tb6pTeMWHuI1lpi"
         crossorigin="anonymous"></script>
+
 </body>
 </html>

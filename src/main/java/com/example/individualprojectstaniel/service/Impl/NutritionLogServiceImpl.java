@@ -29,7 +29,6 @@ public class NutritionLogServiceImpl implements NutritionLogService {
                 .map(entity -> modelMapper.map(entity, NutritionLogDTO.class))
                 .collect(Collectors.toList());
 
-
         return nutritionLogDTOs;
     }
 
@@ -50,7 +49,6 @@ public class NutritionLogServiceImpl implements NutritionLogService {
                 .orElse(null);
 
         if (nutritionLogEntity == null) {
-            // You can customize the behavior when the nutrition log is not found, for example:
             return null;
         }
 

@@ -1,37 +1,33 @@
 package com.example.individualprojectstaniel.service.Impl;
 
-import com.example.individualprojectstaniel.model.dto.MyProfileDTO;
-import com.example.individualprojectstaniel.model.dto.NutritionLogDTO;
-import com.example.individualprojectstaniel.model.dto.UserLoginBindingModel;
-import com.example.individualprojectstaniel.model.dto.UserRegisterBindingModel;
-import com.example.individualprojectstaniel.model.entity.NutritionLogEntity;
+import com.example.individualprojectstaniel.model.dto.*;
 import com.example.individualprojectstaniel.model.entity.UserEntity;
+import com.example.individualprojectstaniel.model.entity.UserRoleEntity;
 import com.example.individualprojectstaniel.repository.UserRepository;
-import com.example.individualprojectstaniel.service.LoggedUser;
+import com.example.individualprojectstaniel.repository.UserRoleRepository;
 import com.example.individualprojectstaniel.service.UserService;
 import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
-    private final LoggedUser loggedUser;
     private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
+    private final UserRoleRepository userRoleRepository;
 
-
-    public UserServiceImpl(UserRepository userRepository, LoggedUser loggedUser, ModelMapper modelMapper, PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder, UserRoleRepository userRoleRepository) {
         this.userRepository = userRepository;
-        this.loggedUser = loggedUser;
         this.modelMapper = modelMapper;
         this.passwordEncoder = passwordEncoder;
+        this.userRoleRepository = userRoleRepository;
     }
 
     @Override
@@ -48,7 +44,8 @@ public class UserServiceImpl implements UserService {
         userRegisterBindingModel.setPassword(passwordEncoder.encode(userRegisterBindingModel.getPassword()));
 
         UserEntity user = modelMapper.map(userRegisterBindingModel, UserEntity.class);
-
+        UserRoleEntity userRole = userRoleRepository.findByName(UserRoleEntity.USER);
+        user.setRoles(userRole);
 
         this.userRepository.save(user);
 
@@ -59,21 +56,8 @@ public class UserServiceImpl implements UserService {
     public boolean login(UserLoginBindingModel userLoginBindingModel) {
         Optional<UserEntity> user = findUserByUsername(userLoginBindingModel.getUsername());
 
-        if (user.isPresent() && passwordEncoder.matches(userLoginBindingModel.getPassword(), user.get().getPassword())) {
-//        if (user.isPresent() && userLoginBindingModel.getPassword().equals(user.get().getPassword())) {
-            loggedUser.setUsername(user.get().getUsername());
-            loggedUser.setLogged(true);
-
-            return true;
-        }
-
-        return false;
-    }
-
-    @Override
-    public void logout() {
-        loggedUser.setUsername(null);
-        loggedUser.setLogged(false);
+        return user.isPresent() &&
+                passwordEncoder.matches(userLoginBindingModel.getPassword(), user.get().getPassword());
     }
 
 
@@ -95,6 +79,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserDTO getCurrentUserById(Long id) {
+        UserEntity userEntity = userRepository.findById(id).orElse(null);
+
+        if (userEntity == null) {
+            return null;
+        }
+
+        return UserDTO.map(userEntity);
+    }
+
+    @Override
     public MyProfileDTO editUser(Long id, MyProfileDTO myProfileDTO) {
         UserEntity existingUserEntity = userRepository.findById(id)
                 .orElse(null);
@@ -110,19 +105,72 @@ public class UserServiceImpl implements UserService {
         return modelMapper.map(existingUserEntity, MyProfileDTO.class);
     }
 
-//    public Long getCurrentUserId() {
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        if (authentication == null || !authentication.isAuthenticated()) {
-//            return null;
-//        }
+    @Override
+    public boolean validateCurrentPassword(ResetPasswordDTO resetPasswordDTO) {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = userDetails.getUsername();
+
+        UserEntity user = userRepository.findByUsername(username).orElse(null);
+
+        return passwordEncoder.matches(resetPasswordDTO.getCurrentPassword(), user != null ? user.getPassword() : null);
+    }
+
+    @Override
+    public void updatePassword(ResetPasswordDTO resetPasswordDTO) {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = userDetails.getUsername();
+
+        UserEntity user = userRepository.findByUsername(username).orElse(null);
+
+        user.setPassword(passwordEncoder.encode(resetPasswordDTO.getNewPassword()));
+
+        userRepository.save(user);
+
+    }
+
+    @Override
+    public List<UserDTO> getAllUsers() {
+
+        return userRepository.findAll().stream().map(UserDTO::map).toList();
+    }
+
+    @Override
+    public void deleteUser(Long id) {
+        userRepository.deleteById(id);
+    }
+
+//    @Override
+//    public void changeRole(Long userId, String newRole) {
+//        Optional<UserEntity> optionalUser = userRepository.findById(userId);
 //
-//        Object principal = authentication.getPrincipal();
-//        if (principal instanceof UserDetails) {
-//            String username = ((UserDetails) principal).getUsername();
-//            // Assuming you have a method to get user ID by username
-//            return userService.getUserIdByUsername(username);
-//        }
+//        if (optionalUser.isPresent()) {
+//            UserEntity userEntity = optionalUser.get();
+//            userEntity.getRoles().clear();
+//            userEntity.getRoles().add(new UserRoleEntity(newRole));
+//            userRepository.save(userEntity);
 //
-//        return null;
+//        } else {
+//            throw new IllegalArgumentException("User not found with ID: " + userId);
+//        }
 //    }
+
+    @Override
+    public void changeRole(Long userId, String newRole) {
+        Optional<UserEntity> optionalUser = userRepository.findById(userId);
+
+        if (optionalUser.isPresent()) {
+            UserEntity userEntity = optionalUser.get();
+            UserRoleEntity role = userRoleRepository.findByName(newRole);
+            userEntity.setRoles(role);
+
+            userRepository.save(userEntity);
+        } else {
+            throw new IllegalArgumentException("User not found with ID: " + userId);
+        }
+    }
+
+    @Override
+    public List<UserDTO> findALl() {
+        return userRepository.findAll().stream().map(UserDTO::map).toList();
+    }
 }

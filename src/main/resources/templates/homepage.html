@@ -5,21 +5,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fitness Spring App</title>
 
-    <!-- Bootstrap CSS -->
+
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom CSS -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
+
     <style>
-        /* Add your custom styles here */
+
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .jumbotron {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .features-section {
+            background-color: #fff;
+            padding: 40px 0;
+        }
+
+        .feature-item {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .feature-icon {
+            font-size: 3em;
+            color: #007bff;
+        }
+
+        .feature-title {
+            margin-top: 10px;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #343a40;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+        }
     </style>
 </head>
 <body>
 
 <header th:replace="fragments/commons::header"></header>
 
-
-<!-- Content -->
 <div class="container mt-4">
+
+
     <div class="jumbotron text-center">
         <h1 class="display-4">Welcome to Staniel Fitness!</h1>
         <p class="lead">Track your fitness journey with our comprehensive tools.</p>
@@ -27,27 +67,56 @@
         <p>Get started by logging your workouts, nutrition, and calculating your BMI.</p>
         <a class="btn btn-primary btn-lg btn-get-started" href="#" role="button">Get Started</a>
     </div>
+
+    <div class="features-section">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="feature-item">
+                    <i class="fas fa-dumbbell feature-icon"></i>
+                    <h3 class="feature-title">Log Your Workouts</h3>
+                    <p>Keep track of your exercises and monitor your progress.</p>
+                    <a href="/workoutlogs" class="btn btn-primary">Explore</a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-item">
+                    <i class="fas fa-utensils feature-icon"></i>
+                    <h3 class="feature-title">Nutrition Tracking</h3>
+                    <p>Record your daily meals and maintain a balanced diet.</p>
+                    <a href="/nutritionlogs" class="btn btn-primary">Explore</a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-item">
+                    <i class="fas fa-calculator feature-icon"></i>
+                    <h3 class="feature-title">BMI Calculator</h3>
+                    <p>Calculate your Body Mass Index for a healthy lifestyle.</p>
+                    <a href="/bmicalculator" class="btn btn-primary">Explore</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
-<!-- Bootstrap JS and dependencies -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-<!-- Your custom JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"></script>
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        // Get Started button click event
         var getStartedButton = document.querySelector('.btn-get-started');
         if (getStartedButton) {
             getStartedButton.addEventListener('click', function () {
                 console.log('Get Started button clicked!');
-                // Add your custom logic or redirect to the desired page
             });
         }
 
-        // Add more custom JavaScript logic as needed
     });
 </script>
+
+<footer th:replace="fragments/commons::footer"></footer>
 </body>
 </html>

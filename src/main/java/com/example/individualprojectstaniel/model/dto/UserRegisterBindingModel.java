@@ -1,10 +1,7 @@
 package com.example.individualprojectstaniel.model.dto;
 
 import com.example.individualprojectstaniel.model.enums.UserGenderEnum;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.*;
 import org.hibernate.validator.constraints.Length;
 
 public class UserRegisterBindingModel {
@@ -18,6 +15,7 @@ public class UserRegisterBindingModel {
 
 
     @NotBlank(message = "Username is required")
+    @Size(min = 3, max = 25, message = "Username length must be between 3 and 25 characters!")
     public String getUsername() {
         return username;
     }

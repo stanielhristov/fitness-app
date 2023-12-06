@@ -1,13 +1,14 @@
 package com.example.individualprojectstaniel.model.entity;
 
 import com.example.individualprojectstaniel.model.enums.UserGenderEnum;
-import com.example.individualprojectstaniel.model.enums.UserRoleEnum;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -33,6 +34,10 @@ public class UserEntity extends BaseEntity {
         this.roles = roles;
     }
 
+    public void setRoles(UserRoleEntity role) {
+        this.roles = List.of(role);
+    }
+
     private List<UserRoleEntity> roles = new ArrayList<>();
 
     public UserEntity() {
@@ -41,7 +46,7 @@ public class UserEntity extends BaseEntity {
 
 
     @Column(name = "username", unique = true)
-    @NotNull
+   @NotNull
     public String getUsername() {
         return username;
     }
@@ -105,4 +110,5 @@ public class UserEntity extends BaseEntity {
     public void setWeight(Integer weight) {
         this.weight = weight;
     }
+
 }

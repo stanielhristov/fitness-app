@@ -1,6 +1,7 @@
 package com.example.individualprojectstaniel.controller;
 
 
+import com.example.individualprojectstaniel.model.dto.ResetPasswordDTO;
 import com.example.individualprojectstaniel.model.dto.UserRegisterBindingModel;
 import com.example.individualprojectstaniel.service.UserService;
 import org.springframework.stereotype.Controller;
@@ -48,4 +49,27 @@ public class UserController {
 
         return new ModelAndView(view);
     }
+
+    @GetMapping("/resetpassword")
+    public ModelAndView resetPassword() {
+        return new ModelAndView("resetpassword");
+    }
+
+    @PostMapping("/resetpassword")
+    public ModelAndView resetPassword(ResetPasswordDTO resetPasswordDTO) {
+        ModelAndView modelAndView = new ModelAndView();
+
+        if (userService.validateCurrentPassword(resetPasswordDTO)) {
+
+            userService.updatePassword(resetPasswordDTO);
+            modelAndView.addObject("successMessage", "Password reset successfully!");
+            modelAndView.setViewName("login"); // Set the view name for success
+        } else {
+            modelAndView.addObject("errorMessage", "Incorrect current password.");
+            modelAndView.setViewName("redirect:/resetpassword?error"); // Set the view name for error
+        }
+
+        return modelAndView;
+    }
+
 }

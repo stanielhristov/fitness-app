@@ -3,15 +3,58 @@
 <head>
     <title>Add Workout Log</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <script>
-        window.onload = function() {
-            var today = new Date();
-            var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-            var time = today.getHours() + ":" + today.getMinutes();
-            document.getElementById("date").value = date;
-            document.getElementById("time").value = time;
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <style>
+        .btn-action {
+            width: 120px;
+            margin-right: 10px;
         }
-    </script>
+
+        .btn-delete {
+            background-color: #dc3545;
+            border-color: #dc3545;
+            color: #fff;
+        }
+
+        .btn-update {
+            background-color: #007bff;
+            border-color: #007bff;
+            color: #fff;
+        }
+
+        .fa-icon {
+            margin-right: 5px;
+        }
+
+        .page-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+
+        .page-title i {
+            font-size: 2.5em;
+        }
+
+        .page-title h2 {
+            margin-bottom: 0;
+            margin-left: 10px;
+            font-size: 2em;
+        }
+
+        .icon-text {
+            display: flex;
+            align-items: center;
+        }
+
+        .icon-text i {
+            margin-right: 5px;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
 <header th:replace="fragments/commons::header"></header>
@@ -19,29 +62,26 @@
     <h2 class="mt-5">Add Workout Log</h2>
     <form action="#" th:action="@{/workoutlogs}" method="post">
         <div class="form-group">
-            <label for="date">Date</label>
+            <label for="date"><div class="icon-text"><i class="fas fa-calendar-alt fa-icon"></i> Date</div></label>
             <input type="date" th:name="date" class="form-control" id="date">
         </div>
         <div class="form-group">
-            <label for="time">Time</label>
+            <label for="time"><div class="icon-text"><i class="fas fa-clock fa-icon"></i> Time</div></label>
             <input type="time" th:name="time" class="form-control" id="time">
         </div>
         <div class="form-group">
-            <label for="notes">Notes</label>
+            <label for="notes"><div class="icon-text"><i class="fas fa-sticky-note fa-icon"></i> Notes</div></label>
             <textarea th:name="notes" class="form-control" id="notes"></textarea>
         </div>
 
-
         <div class="form-group form-check">
             <input type="checkbox" th:name="completed" class="form-check-input" id="completed"  th:checked="${completed}" value="true">
-            <label class="form-check-label" for="Completed">Completed</label>
+            <label class="form-check-label" for="Completed"><div class="icon-text"><i class="fas fa-check-square fa-icon"></i> Completed</div></label>
         </div>
 
-
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary"><i class="fas fa-save fa-icon"></i> Submit</button>
     </form>
 </div>
 <footer th:replace="fragments/commons::footer"></footer>
-
 </body>
 </html>

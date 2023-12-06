@@ -7,58 +7,136 @@
 
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 
-  <!-- Custom CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
   <style>
-    /* Add your custom styles here */
+    body {
+      background-color: #fff;
+      color: #000;
+    }
+
+    .jumbotron {
+      background-color: #007bff;
+      color: #fff;
+      padding: 50px;
+      border-radius: 0;
+      margin-bottom: 0;
+    }
+
+    .profile-info {
+      margin-top: 30px;
+    }
+
+    .profile-info .list-group-item {
+      background-color: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.125);
+      color: #000;
+    }
+
+    .list-group-item i {
+      margin-right: 10px;
+      color: #007bff;
+    }
+
+    .btn-group {
+      margin-top: 20px;
+    }
+
+    .btn-primary {
+      background-color: #0056b3;
+      border-color: #0056b3;
+      color: #fff;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    .btn-primary:hover {
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+
+    table {
+      background-color: #fff;
+      color: #000;
+    }
+
+    table th, table td {
+      border: 1px solid #007bff;
+      color: #007bff;
+    }
+
+    .btn-table-primary {
+      background-color: #0056b3;
+      border-color: #0056b3;
+      color: #fff;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    .btn-table-primary:hover {
+      background-color: #007bff;
+      border-color: #007bff;
+    }
   </style>
 </head>
 <body>
 
-<!-- Thymeleaf Header (if you have one) -->
 <header th:replace="fragments/commons::header"></header>
 
-<!-- Navbar (if you have one) -->
-
-
-<!-- Content -->
 <div class="container mt-4">
   <div class="jumbotron">
     <h1 class="display-4 text-center">My Fitness Profile</h1>
 
-    <!-- Profile Information -->
-    <div class="row">
+    <div class="row profile-info">
       <div class="col-md-6 offset-md-3">
-        <ul class="list-group" th:object="${profile}">
-          <li class="list-group-item">Username: <span th:text="${profile.user}"></span></li>
-          <li class="list-group-item">Email: <span th:text="${profile.email}"></span></li>
-          <li class="list-group-item">Gender: <span th:text="${profile.gender}"></span></li>
-          <li class="list-group-item">Height: <span th:text="${profile.height}"></span> cm</li>
-          <li class="list-group-item">Weight: <span th:text="${profile.weight}"></span> kg</li>
-          <li class="list-group-item">BMI: <span th:text="${profile.BMI}"></span></li>
-<!--          <li class="list-group-item">Fitness Goals: <span th:text="${profile.fitnessGoals}"></span></li>-->
-<!--          <li class="list-group-item">Body Measurements: <span th:text="${profile.bodyMeasurements}"></span></li>-->
-<!--          <li class="list-group-item">Progress Photos: <span th:text="${profile.progressPhotos}"></span></li>-->
-<!--          <li class="list-group-item">Personal Records (PRs): <span th:text="${profile.personalRecords}"></span></li>-->
-<!--          <li class="list-group-item">Preferred Workouts: <span th:text="${profile.preferredWorkouts}"></span></li>-->
-        </ul>
+        <table class="table">
+          <tr>
+            <th><i class="fas fa-user"></i> Username</th>
+            <td><span th:text="${profile.user}"></span></td>
+          </tr>
+          <tr>
+            <th><i class="fas fa-envelope"></i> Email</th>
+            <td><span th:text="${profile.email}"></span></td>
+          </tr>
+          <tr>
+            <th><i class="fas fa-venus-mars"></i> Gender</th>
+            <td>
+              <span th:if="${profile.gender eq 'MALE'}"><i class="fas fa-mars"></i> Male</span>
+              <span th:if="${profile.gender eq 'FEMALE'}"><i class="fas fa-venus"></i> Female</span>
+            </td>
+          </tr>
+          <tr>
+            <th><i class="fas fa-arrows-alt-v"></i> Height</th>
+            <td><span th:text="${profile.height}"></span> cm</td>
+          </tr>
+          <tr>
+            <th><i class="fas fa-weight"></i> Weight</th>
+            <td><span th:text="${profile.weight}"></span> kg</td>
+          </tr>
+          <tr>
+            <th><i class="fas fa-balance-scale"></i> BMI</th>
+            <td><span th:text="${profile.BMI}"></span></td>
+          </tr>
+        </table>
       </div>
     </div>
 
-    <!-- Edit Profile Button -->
     <div class="text-center mt-4">
-      <a class="btn btn-primary" th:href="@{/myprofile/edit/{id}(id=${profile.id})}" role="button">Edit Profile</a>
+      <div class="btn-group">
+        <a class="btn btn-primary" th:href="@{/myprofile/edit/{id}(id=${profile.id})}" role="button">Edit Profile</a>
+        <a class="btn btn-primary ml-2" th:href="@{/resetpassword}" role="button">Reset Password</a>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- Bootstrap JS and dependencies -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-<!-- Your custom JavaScript (if needed) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"></script>
+
 <script>
-  // Add your custom JavaScript code here
+
 </script>
+<footer th:replace="fragments/commons::footer"></footer>
 </body>
 </html>

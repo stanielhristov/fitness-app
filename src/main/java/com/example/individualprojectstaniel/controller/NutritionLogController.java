@@ -4,6 +4,7 @@ import com.example.individualprojectstaniel.model.dto.NutritionLogDTO;
 import com.example.individualprojectstaniel.model.entity.UserEntity;
 import com.example.individualprojectstaniel.service.NutritionLogService;
 import com.example.individualprojectstaniel.service.UserService;
+import jakarta.annotation.security.RolesAllowed;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -24,17 +25,10 @@ public class NutritionLogController {
         this.userService = userService;
     }
 
-//    @GetMapping
-//    public ModelAndView getAllNutritionLogs() {
-//        List<NutritionLogDTO> nutritionLogs = nutritionLogService.getAllNutritionLogs();
-//
-//        ModelAndView modelAndView = new ModelAndView("nutritionlogs");
-//        modelAndView.addObject("nutritionlogs", nutritionLogs);
-//
-//        return modelAndView;
-//    }
+
 
     @GetMapping
+    @RolesAllowed(value = {"USER", "ADMIN"})
     public ModelAndView getAllNutritionLogsForCurrentUser() {
         ModelAndView modelAndView = new ModelAndView("nutritionlogs");
 
@@ -46,10 +40,7 @@ public class NutritionLogController {
         modelAndView.addObject("nutritionlogs", nutritionLogs);
 
         return modelAndView;
-
     }
-
-
 
     @GetMapping("/update/{id}")
     public ModelAndView showUpdateForm(@PathVariable Long id) {

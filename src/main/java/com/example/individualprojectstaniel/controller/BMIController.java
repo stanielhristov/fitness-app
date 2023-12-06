@@ -16,8 +16,9 @@ public class BMIController {
     public ModelAndView calculateBmi() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("bmi", 0);
+        modelAndView.setViewName("bmicalculator");
 
-        return new ModelAndView("bmicalculator");
+        return modelAndView;
     }
 
 
@@ -45,7 +46,7 @@ public class BMIController {
         return modelAndView;
     }
 
-    private void validateBmi(BMIDto bmiDto) {
+    public void validateBmi(BMIDto bmiDto) {
         if (bmiDto.getHeight() < 10) {
             throw new IllegalArgumentException("Height must be greater than 10");
         }

@@ -3,43 +3,88 @@
 <head>
     <title>Update Nutrition Log</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+        .btn-action {
+            width: 120px;
+            margin-right: 10px;
+        }
+
+        .btn-delete {
+            background-color: #dc3545;
+            border-color: #dc3545;
+            color: #fff;
+        }
+
+        .btn-update {
+            background-color: #007bff;
+            border-color: #007bff;
+            color: #fff;
+        }
+
+        .fa-icon {
+            margin-right: 5px;
+            color: #007bff;
+        }
+
+        .page-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+
+        .page-title i {
+            font-size: 2.5em;
+        }
+
+        .page-title h2 {
+            margin-bottom: 0;
+            margin-left: 10px;
+            font-size: 2em;
+        }
+    </style>
 </head>
 <body>
 <header th:replace="fragments/commons::header"></header>
 <div class="container">
-    <h2 class="mt-5">Update Nutrition Log</h2>
+    <div class="page-title">
+        <i class="fas fa-utensils fa-icon"></i>
+        <h2 class="mt-5">Update Nutrition Log</h2>
+    </div>
     <form action="#" th:action="@{/nutritionlogs/update/{id}(id=${nutritionLogDTO.id})}" method="post">
         <div class="form-group">
-            <label for="mealDetails">Meal Details</label>
+            <label for="mealDetails"><i class="fas fa-utensils fa-icon"></i> Meal Details</label>
             <input type="text" class="form-control" id="mealDetails" th:name="mealDetails" th:value="${nutritionLogDTO.mealDetails}">
         </div>
         <div class="form-group">
-            <label for="calories">Calories</label>
+            <label for="calories"><i class="fas fa-fire fa-icon"></i> Calories</label>
             <input type="number" class="form-control" id="calories" th:name="calories" th:value="${nutritionLogDTO.calories}">
         </div>
         <div class="form-group">
-            <label for="protein">Protein</label>
+            <label for="protein"><i class="fas fa-dumbbell fa-icon"></i> Protein</label>
             <input type="number" class="form-control" id="protein" th:name="protein" th:value="${nutritionLogDTO.protein}">
         </div>
         <div class="form-group">
-            <label for="fat">Fat</label>
+            <label for="fat"><i class="fas fa-bacon fa-icon"></i> Fat</label>
             <input type="number" class="form-control" id="fat" th:name="fat" th:value="${nutritionLogDTO.fat}">
         </div>
         <div class="form-group">
-            <label for="carbohydrates">Carbohydrates</label>
+            <label for="carbohydrates"><i class="fas fa-carrot fa-icon"></i> Carbohydrates</label>
             <input type="number" class="form-control" id="carbohydrates" th:name="carbohydrates" th:value="${nutritionLogDTO.carbohydrates}">
         </div>
         <div class="form-group">
-            <label for="date">Date</label>
+            <label for="date"><i class="fas fa-calendar-alt fa-icon"></i> Date</label>
             <input type="date" class="form-control" id="date" th:name="date" th:value="${nutritionLogDTO.date}">
         </div>
         <div class="form-group">
-            <label for="time">Time</label>
+            <label for="time"><i class="fas fa-clock fa-icon"></i> Time</label>
             <input type="time" class="form-control" id="time" th:name="time" th:value="${nutritionLogDTO.time}">
         </div>
-        <button type="submit" class="btn btn-primary">Update</button>
+        <button type="submit" class="btn btn-primary"><i class="fas fa-edit fa-icon"></i> Update</button>
     </form>
 </div>
 <footer th:replace="fragments/commons::footer"></footer>

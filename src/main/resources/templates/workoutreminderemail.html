@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Workout Reminder</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 20px auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      color: #007bff;
+    }
+
+    p {
+      line-height: 1.6;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    strong {
+      color: #28a745;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h2>Workout Reminder</h2>
+  <p>Hello [[${userName}]],</p>
+  <p>Don't forget to do your workout today. Here are the details:</p>
+  <ul>
+    <li><strong>Exercise:</strong> [[${exerciseName}]]</li>
+    <li><strong>Duration:</strong> [[${exerciseDuration}]] minutes</li>
+  </ul>
+  <p>Stay healthy!</p>
+</div>
+</body>
+</html>

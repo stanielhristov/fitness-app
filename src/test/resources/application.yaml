@@ -1,0 +1,82 @@
+spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${fitness.email}
+    password: ${fitness.password}
+    properties:
+      mail:
+        smtp:
+          auth: false
+          starttls:
+            enable: true
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: 'TRUE'
+    hibernate:
+      ddl-auto: update
+    open-in-view: 'false'
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: 'true'
+
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    password: ${db_password}
+    username: ${db_username:root}
+    url: jdbc:mysql://localhost:3306/individualProjectStaniel?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC
+  thymeleaf: # Thymeleaf
+    cache: false
+    mode: HTML
+    encoding: UTF-8
+    prefix: file:src/main/resources/templates/
+  web:
+    resources:
+      static-locations: file:src/main/resources/static/
+      cache:
+        period: 0
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor: TRACE
+        SQL: DEBUG
+      nodeValue: WARN
+    blog: WARN
+server:
+  port: 8080
+
+individualprojectstaniel:
+  remember:
+    me:
+      key: mySecretKey
+
+
+
+#                  spring.profiles.active=@active.mode@
+#                  spring.data.mongodb.database=karaoke-db
+#                  server.port=5813
+#                  base.host=@base.host@
+#
+#                  spring.mail.host=smtp.gmail.com
+#                  spring.mail.port=587
+#                  spring.mail.username=yourEmail@gmail.com
+#                  spring.mail.password=yourEmailPassword
+#                  mail.transport.protocol=smtp
+#                  spring.mail.properties.mail.smtp.auth=true
+#                  spring.mail.properties.mail.smtp.starttls.enable=true
+#                  mail.from.email=yourEmail@gmail.com
+#                  mail.debug=true
+
+#After 3 years of frustation here is a solution for a working HOT SWAP:
+#
+#  https://attacomsian.com/blog/spring-boot-auto-reload-thymeleaf-templates
+#
+#  Below are my tested settings (this is the only thing I've changed for it to work).
+
+#application.yaml:
+

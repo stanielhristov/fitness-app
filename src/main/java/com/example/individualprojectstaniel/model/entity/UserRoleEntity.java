@@ -1,25 +1,26 @@
 package com.example.individualprojectstaniel.model.entity;
 
-import com.example.individualprojectstaniel.model.enums.UserRoleEnum;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "roles")
+@Data
 public class UserRoleEntity extends BaseEntity {
-    private UserRoleEnum role;
+    public static String USER = "USER";
+    public static String ADMIN = "ADMIN";
+
+    @Column(name = "name")
+    private String name;
 
     public UserRoleEntity() {
     }
 
-
-    @Enumerated(EnumType.STRING)
-    public UserRoleEnum getRole() {
-        return role;
-    }
-
-    public void setRole(UserRoleEnum role) {
-        this.role = role;
+    public UserRoleEntity(String name) {
+        this.name = name;
     }
 }

@@ -1,11 +1,14 @@
 package com.example.individualprojectstaniel.config;
 
 import com.example.individualprojectstaniel.repository.UserRepository;
-import com.example.individualprojectstaniel.service.UserDetailsService;
+import com.example.individualprojectstaniel.service.Impl.UserDetailsService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.security.reactive.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -13,6 +16,9 @@ import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
+@EnableMethodSecurity(
+//        securedEnabled = true,
+        jsr250Enabled = true)
 public class SecurityConfiguration {
 
 
@@ -80,4 +86,11 @@ public class SecurityConfiguration {
         return Pbkdf2PasswordEncoder.defaultsForSpringSecurity_v5_8();
     }
 
+    @Bean
+    public RoleHierarchy roleHierarchy() {
+        RoleHierarchyImpl roleHierarchy = new RoleHierarchyImpl();
+        String hierarchy = "ROLE_OWNER > ROLE_ADMIN \n ROLE_ADMIN > ROLE_USER \n ADMIN > USER";
+        roleHierarchy.setHierarchy(hierarchy);
+        return roleHierarchy;
+    }
 }
