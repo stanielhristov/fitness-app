@@ -1,7 +1,7 @@
 spring:
   mail:
-    host: localhost
-    port: 8080
+    host: smtp.gmail.com
+    port: 587
     username: ${fitness.email}
     password: ${fitness.password}
     properties:

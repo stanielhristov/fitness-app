@@ -4,7 +4,9 @@ package com.example.individualprojectstaniel.controller;
 import com.example.individualprojectstaniel.model.dto.ResetPasswordDTO;
 import com.example.individualprojectstaniel.model.dto.UserRegisterBindingModel;
 import com.example.individualprojectstaniel.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -42,7 +44,13 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ModelAndView register(UserRegisterBindingModel userRegisterBindingModel) {
+    public ModelAndView register(@Valid UserRegisterBindingModel userRegisterBindingModel, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            ModelAndView modelAndView = new ModelAndView("register");
+
+            modelAndView.addObject("errorMessage", bindingResult.getAllErrors().get(0).getDefaultMessage());
+            return modelAndView;
+        }
         boolean isRegistered = userService.register(userRegisterBindingModel);
 
         String view = isRegistered ? "redirect:/login" : "register";
@@ -63,10 +71,10 @@ public class UserController {
 
             userService.updatePassword(resetPasswordDTO);
             modelAndView.addObject("successMessage", "Password reset successfully!");
-            modelAndView.setViewName("login"); // Set the view name for success
+            modelAndView.setViewName("login");
         } else {
             modelAndView.addObject("errorMessage", "Incorrect current password.");
-            modelAndView.setViewName("redirect:/resetpassword?error"); // Set the view name for error
+            modelAndView.setViewName("redirect:/resetpassword?error");
         }
 
         return modelAndView;

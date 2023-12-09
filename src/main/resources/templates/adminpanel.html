@@ -26,6 +26,10 @@
       display: flex;
       align-items: center;
     }
+
+    .btn-fixed-width {
+      width: 150px; /* Adjust the width as needed */
+    }
   </style>
 </head>
 <body>
@@ -50,8 +54,7 @@
       </tr>
       </thead>
       <tbody>
-
-      <tr th:each="user : ${users}">
+      <tr th:each="user : ${users}" th:id="'userRow-' + ${user.id}">
         <td th:text="${user.id}"></td>
         <td th:text="${user.username}"></td>
         <td th:text="${user.email}"></td>
@@ -60,11 +63,10 @@
         <td th:text="${user.weight}"></td>
         <td th:text="${user.role}"></td>
         <td>
-
-          <button type="button" class="btn btn-danger btn-delete btn-space" th:data="${user.id}">
+          <button type="button" class="btn btn-danger btn-delete btn-space btn-fixed-width" th:data="${user.id}">
             <div class="icon-text"><i class="fas fa-trash icon"></i>Delete User</div>
           </button>
-          <a class="btn btn-primary btn-space" th:href="@{/adminpanel/changerole/{id}(id=${user.id})}" role="button">
+          <a class="btn btn-primary btn-space btn-fixed-width" th:href="@{/adminpanel/changerole/{id}(id=${user.id})}" role="button">
             <div class="icon-text"><i class="fas fa-user-cog icon"></i>Change Role</div>
           </a>
           <form th:action="@{/adminpanel/{id}(id=${user.id})}" method="get" style="display: inline;" id="updateForm">
@@ -81,25 +83,34 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <script>
-  document.querySelectorAll('.btn-delete').forEach(function (button) {
-    button.addEventListener('click', function (event) {
-      event.stopPropagation();
-      var id = this.getAttribute('data');
-      var confirmDelete = confirm('Are you sure you want to delete user with ID: ' + id + '?');
-      if (confirmDelete) {
-        fetch('/adminpanel/' + id, {
-          method: 'DELETE',
-        })
-                .then(response => {
-                  return response.json();
-                })
-                .then(data => {
-                  window.location.href = '/adminpanel';
-                })
-                .catch((error) => {
-                  console.error('Error:', error);
-                });
-      }
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.btn-delete').forEach(function(button) {
+      button.addEventListener('click', function(event) {
+        event.stopPropagation();
+        var id = this.getAttribute('data');
+        var confirmDelete = confirm('Are you sure you want to delete user with ID: ' + id + '?');
+        if (confirmDelete) {
+          fetch('/adminpanel/' + id, {
+            method: 'DELETE',
+          })
+                  .then(response => {
+                    if (!response.ok) {
+                      throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                  })
+                  .then(data => {
+                    // Remove the deleted user's row from the table
+                    var rowToDelete = document.getElementById('userRow-' + id);
+                    if (rowToDelete) {
+                      rowToDelete.remove();
+                    }
+                  })
+                  .catch((error) => {
+                    console.error('Error:', error);
+                  });
+        }
+      });
     });
   });
 </script>

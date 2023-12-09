@@ -89,13 +89,4 @@ public class WorkoutLogController {
         return new ModelAndView("redirect:/workoutlogs");
     }
 
-    @PostMapping(value = "/{id}", consumes = "application/json")
-    public ModelAndView update(@PathVariable Long id, @RequestBody WorkoutLogDTO workoutLogDTO) {
-        WorkoutLogDTO updatedWorkoutLog = workoutLogService.updateWorkoutLog(id, workoutLogDTO);
-
-        ModelAndView modelAndView = new ModelAndView("redirect:/workoutlogs");
-        modelAndView.addObject("workoutLog", updatedWorkoutLog);
-
-        return modelAndView;
-    }
 }

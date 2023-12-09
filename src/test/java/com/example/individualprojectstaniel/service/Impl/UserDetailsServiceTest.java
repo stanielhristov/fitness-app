@@ -12,7 +12,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -42,7 +41,7 @@ class UserDetailsServiceTest {
         UserEntity userEntity = new UserEntity();
         userEntity.setUsername(username);
         userEntity.setPassword(password);
-        userEntity.setRoles((List<UserRoleEntity>) Collections.singleton(userRoleEntity));
+        userEntity.setRoles(userRoleEntity);
 
         when(userRepository.findByUsername(username)).thenReturn(Optional.of(userEntity));
 

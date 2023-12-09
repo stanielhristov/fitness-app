@@ -33,15 +33,14 @@ class WorkoutLogServiceImplTest {
     @InjectMocks
     private WorkoutLogServiceImpl workoutLogService;
 
-
-
     @Test
     void createWorkoutLog() {
         Authentication auth = mock(Authentication.class);
         SecurityContextHolder.getContext().setAuthentication(auth);
         UserEntity user = new UserEntity();
         user.setUsername("testUser");
-        when(userService.findUserByUsername("testUser")).thenReturn(Optional.of(user));
+        when(userService.findUserByUsername(user.getUsername())).thenReturn(Optional.of(user));
+        when(auth.getName()).thenReturn(user.getUsername());
 
         WorkoutLogDTO inputDTO = new WorkoutLogDTO();
         WorkoutLogEntity outputEntity = new WorkoutLogEntity();
@@ -51,7 +50,7 @@ class WorkoutLogServiceImplTest {
 
         WorkoutLogDTO result = workoutLogService.createWorkoutLog(inputDTO);
 
-        verify(userService, times(1)).findUserByUsername("testUser");
+        verify(userService, times(1)).findUserByUsername(user.getUsername());
         verify(workoutLogRepository, times(1)).save(any(WorkoutLogEntity.class));
         assertEquals(inputDTO, result);
     }
@@ -108,6 +107,7 @@ class WorkoutLogServiceImplTest {
         when(workoutLogRepository.findById(1L)).thenReturn(Optional.of(workoutLogEntity));
         when(workoutLogRepository.save(any(WorkoutLogEntity.class))).thenReturn(workoutLogEntity);
         when(modelMapper.map(workoutLogEntity, WorkoutLogDTO.class)).thenReturn(workoutLogDTO);
+        doNothing().when(modelMapper).map(any(), any(WorkoutLogEntity.class));
 
         WorkoutLogDTO result = workoutLogService.updateWorkoutLog(1L, workoutLogDTO);
 
@@ -134,7 +134,7 @@ class WorkoutLogServiceImplTest {
         when(workoutLogRepository.findById(1L)).thenReturn(Optional.of(existingEntity));
         when(workoutLogRepository.save(any(WorkoutLogEntity.class))).thenReturn(existingEntity);
         when(modelMapper.map(existingEntity, WorkoutLogDTO.class)).thenReturn(updatedDTO);
-
+        doNothing().when(modelMapper).map(any(), any(WorkoutLogEntity.class));
         WorkoutLogDTO result = workoutLogService.updateWorkoutLog(1L, updatedDTO);
 
         verify(workoutLogRepository, times(1)).findById(1L);

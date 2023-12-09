@@ -1,6 +1,5 @@
 package com.example.individualprojectstaniel.controller;
 
-import com.example.individualprojectstaniel.controller.UserController;
 import com.example.individualprojectstaniel.model.dto.ResetPasswordDTO;
 import com.example.individualprojectstaniel.model.dto.UserRegisterBindingModel;
 import com.example.individualprojectstaniel.service.UserService;
@@ -8,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -34,7 +34,8 @@ public class UserControllerTest {
         UserRegisterBindingModel userRegisterBinding = new UserRegisterBindingModel();
         when(userService.register(userRegisterBinding)).thenReturn(true);
 
-        ModelAndView actual = userController.register(userRegisterBinding);
+        BindingResult result = mock(BindingResult.class);
+        ModelAndView actual = userController.register(userRegisterBinding, result);
 
         assertThat(actual.getViewName()).isEqualTo("redirect:/login");
     }
@@ -44,7 +45,8 @@ public class UserControllerTest {
         UserRegisterBindingModel userRegisterBinding = new UserRegisterBindingModel();
         when(userService.register(userRegisterBinding)).thenReturn(false);
 
-        ModelAndView actual = userController.register(userRegisterBinding);
+        BindingResult result = mock(BindingResult.class);
+        ModelAndView actual = userController.register(userRegisterBinding, result);
 
         assertThat(actual.getViewName()).isEqualTo("register");
     }

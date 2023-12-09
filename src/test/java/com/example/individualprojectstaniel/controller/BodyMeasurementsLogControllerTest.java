@@ -103,4 +103,6 @@ public class BodyMeasurementsLogControllerTest {
 
         assertEquals("error-page", modelAndView.getViewName());
     }
+
+
 }
