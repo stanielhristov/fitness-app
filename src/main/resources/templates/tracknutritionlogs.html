@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Track Nutritions</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <style>
+        .btn-action {
+            width: 120px;
+            margin-right: 10px;
+        }
+
+        .fa-icon {
+            margin-right: 5px;
+        }
+
+        .page-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+
+        .page-title i {
+            font-size: 2.5em;
+        }
+
+        .page-title h2 {
+            margin-bottom: 0;
+            margin-left: 10px;
+            font-size: 2em;
+        }
+
+        .icon-text {
+            display: flex;
+            align-items: center;
+        }
+
+        .icon-text i {
+            margin-right: 5px;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<header th:replace="fragments/commons::header"></header>
+<div class="container">
+    <div class="page-title">
+        <i class="fas fa-utensils fa-icon"></i>
+        <h2 class="mt-5">Track Nutritions</h2>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th><div class="icon-text"><i class="fas fa-utensils fa-icon"></i> Meal Details</div></th>
+            <th><div class="icon-text"><i class="fas fa-fire fa-icon"></i> Calories</div></th>
+            <th><div class="icon-text"><i class="fas fa-dumbbell fa-icon"></i> Protein</div></th>
+            <th><div class="icon-text"><i class="fas fa-bacon fa-icon"></i> Fat</div></th>
+            <th><div class="icon-text"><i class="fas fa-carrot fa-icon"></i> Carbohydrates</div></th>
+            <th><div class="icon-text"><i class="fas fa-calendar-alt fa-icon"></i> Date</div></th>
+            <th><div class="icon-text"><i class="fas fa-clock fa-icon"></i> Time</div></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="log : ${nutritionlogs}">
+            <td><div class="icon-text"><i class="fas fa-utensils fa-icon"></i> <span th:text="${log.mealDetails}"></span></div></td>
+            <td><div class="icon-text"><i class="fas fa-fire fa-icon"></i> <span th:text="${log.calories}"></span></div></td>
+            <td><div class="icon-text"><i class="fas fa-dumbbell fa-icon"></i> <span th:text="${log.protein}"></span></div></td>
+            <td><div class="icon-text"><i class="fas fa-bacon fa-icon"></i> <span th:text="${log.fat}"></span></div></td>
+            <td><div class="icon-text"><i class="fas fa-carrot fa-icon"></i> <span th:text="${log.carbohydrates}"></span></div></td>
+            <td><div class="icon-text"><i class="fas fa-calendar-alt fa-icon"></i> <span th:text="${log.date}"></span></div></td>
+            <td><div class="icon-text"><i class="fas fa-clock fa-icon"></i> <span th:text="${log.time}"></span></div></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<footer th:replace="fragments/commons::footer"></footer>
+</body>
+</html>

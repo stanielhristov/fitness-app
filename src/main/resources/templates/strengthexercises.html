@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strength Training Exercises</title>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+
+        .jumbotron {
+            background-color: #007bff;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 0;
+            padding: 2rem 1rem;
+        }
+
+        .exercise-table {
+            margin-top: 20px;
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .exercise-table th, .exercise-table td {
+            border: 1px solid #dee2e6;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .exercise-table th {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .exercise-table tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+        }
+
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<header th:replace="fragments/commons::header"></header>
+
+<div class="jumbotron">
+    <h1 class="display-4">Strength Training Exercises</h1>
+    <p class="lead">Build muscle strength and endurance</p>
+</div>
+
+<div class="container">
+    <div class="form-group">
+        <label for="muscleGroupSelect">Filter by Muscle Group:</label>
+        <select class="form-control" id="muscleGroupSelect" onchange="filterTable()">
+            <option value="all">All</option>
+            <option value="Chest">Chest</option>
+            <option value="Whole Body">Whole Body</option>
+            <option value="Legs">Legs</option>
+            <option value="Biceps">Biceps</option>
+            <option value="Triceps">Triceps</option>
+            <option value="Shoulders">Shoulders</option>
+            <option value="Back">Back</option>
+            <option value="Core">Core</option>
+            <option value="Forearms">Forearms</option>
+            <!-- Add more muscle groups as needed -->
+        </select>
+    </div>
+
+    <table class="table exercise-table">
+        <thead>
+        <tr>
+            <th>Exercise</th>
+            <th>Muscle Group</th>
+            <th>Description</th>
+            <th>Video</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Push-up</td>
+            <td>Chest</td>
+            <td>Push-ups are a classic bodyweight exercise that target the chest, shoulders, and triceps, helping to build upper body strength and endurance.</td>
+            <td>
+                <div class="video-container">
+                    <video controls>
+                        <source src="push-up.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Squat</td>
+            <td>Legs</td>
+            <td>Squats are a fundamental lower body exercise that target the quadriceps, hamstrings, and glutes, improving lower body strength and stability.</td>
+            <td>
+                <div class="video-container">
+                    <video controls>
+                        <source src="squat.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Deadlift</td>
+            <td>Whole Body</td>
+            <td>Deadlifts are compound exercises that work multiple muscle groups including the back, glutes, hamstrings, and core, promoting overall strength and power.</td>
+            <td>
+                <div class="video-container">
+                    <video controls>
+                        <source src="deadlift.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Hex Bar Deadlift</td>
+            <td>Whole Body</td>
+            <td>The hex bar deadlift is a weightlifting exercise where you lift a hexagonal barbell from the ground, targeting the lower body muscles like the glutes, hamstrings, and quadriceps.
+            </td>
+            <td>
+                <div class="video-container">
+                    <video controls>
+                        <source src="deadlift.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Power Clean</td>
+            <td>Whole Body</td>
+            <td>
+                The power clean is a weightlifting move where you quickly lift a barbell from the floor to shoulder height, using explosive power from the legs and hips.</td>
+            <td>
+                <div class="video-container">
+                    <video controls>
+                        <source src="deadlift.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Bench Press</td>
+            <td>Chest</td>
+            <td>The bench press is a compound exercise that primarily targets the chest, shoulders, and triceps, helping to increase upper body strength and muscle mass.</td>
+            <td>
+                <div class="video-container">
+                    <video controls>
+                        <source src="bench-press.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Dumbbell Bench Press</td>
+            <td>Chest</td>
+            <td>
+                The dumbbell bench press is a chest exercise where you lie on a bench and press dumbbells upward until your arms are straight.</td>
+            <td>
+                <div class="video-container">
+                    <video controls>
+                        <source src="bench-press.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Machine Chest Fly</td>
+            <td>Chest</td>
+            <td>
+                The machine chest fly is an exercise performed on a chest fly machine. You sit and grasp the handles, then bring them together in front of your chest, squeezing your pecs. This movement primarily targets the chest muscles, providing a controlled and effective way to strengthen and shape the chest.</td>
+            <td>
+                <div class="video-container">
+                    <video controls>
+                        <source src="bench-press.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Dumbbell Curl</td>
+            <td>Biceps</td>
+            <td> Stand with feet shoulder-width apart, hold dumbbells at sides, palms facing forward. Curl weights toward shoulders, then lower slowly. Builds bicep strength and size.</td>
+            <td>
+                <div class="video-container">
+                    <video controls>
+                        <source src="squat.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Hammer Curl</td>
+            <td>Biceps</td>
+            <td> Hammer curls are a bicep exercise where you hold a pair of dumbbells with your palms facing inward, and then curl the weights toward your shoulders. This movement targets the biceps brachii muscles, as well as the brachialis and brachioradialis muscles, helping to build overall arm strength and size.</td>
+            <td>
+                <div class="video-container">
+                    <video controls>
+                        <source src="squat.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Barbell Curl</td>
+            <td>Biceps</td>
+            <td> Stand with feet shoulder-width apart, hold a barbell with an underhand grip, palms facing up. Keep elbows close to your body as you curl the barbell toward your shoulders. Lower the barbell back to the starting position under control. Builds bicep strength and size."</td>
+            <td>
+                <div class="video-container">
+                    <video controls>
+                        <source src="squat.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Dips</td>
+            <td>Triceps</td>
+            <td> Position yourself between parallel bars, arms straight. Lower body by bending elbows until shoulders dip below elbows, then push back up. Works triceps, chest, and shoulders.""</td>
+            <td>
+                <div class="video-container">
+                    <video controls>
+                        <source src="squat.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Triceps Pushdown</td>
+            <td>Triceps</td>
+            <td>
+                The triceps pushdown is an exercise where you use a cable machine to push a bar downward, targeting the triceps muscle in the arms.</td>
+            <td>
+                <div class="video-container">
+                    <video controls>
+                        <source src="squat.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Shoulder Press</td>
+            <td>Shoulders</td>
+            <td>
+                The shoulder press is a weightlifting exercise that targets the shoulder muscles. It's typically performed by pressing weights overhead, either with dumbbells, a barbell, or a machine. This movement strengthens the deltoid muscles and is a fundamental exercise in upper body strength training.</td>
+            <td>
+                <div class="video-container">
+                    <video controls>
+                        <source src="squat.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Dumbbell Shoulder Press</td>
+            <td>Shoulders</td>
+            <td>
+                The dumbbell shoulder press is a shoulder exercise where you sit or stand and hold a dumbbell in each hand at shoulder height. Then, you press the weights overhead until your arms are fully extended, and lower them back down. This movement primarily targets the deltoid muscles of the shoulders, helping to build strength and definition in the shoulder area.</td>
+            <td>
+                <div class="video-container">
+                    <video controls>
+                        <source src="squat.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Dumbbell Lateral Raise</td>
+            <td>Shoulders</td>
+            <td>
+                The dumbbell lateral raise is a shoulder exercise where you stand with a dumbbell in each hand by your sides. With a slight bend in your elbows, raise the weights out to your sides until they are parallel to the ground. Then, lower them back down with control. This movement primarily targets the side deltoid muscles, helping to build broader shoulders and improve shoulder stability.</td>
+            <td>
+                <div class="video-container">
+                    <video controls>
+                        <source src="squat.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Leg Extension</td>
+            <td>Legs</td>
+            <td>
+                Leg extensions are a strength training exercise that primarily targets the quadriceps muscles in the front of the thigh. They're typically performed using a leg extension machine where you sit and extend your legs against resistance. This exercise helps to build strength and definition in the quads.</td>
+            <td>
+                <div class="video-container">
+                    <video controls>
+                        <source src="squat.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Hack Squat</td>
+            <td>Legs</td>
+            <td>
+                The hack squat is a machine-based lower body exercise where you lower your body by bending your knees and then push back up, targeting the quadriceps, glutes, and hamstrings.</td>
+            <td>
+                <div class="video-container">
+                    <video controls>
+                        <source src="squat.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Hip Thrust</td>
+            <td>Legs</td>
+            <td>
+                The hip thrust is a lower body exercise where you lift your hips upward while seated on the ground, targeting the glutes, hamstrings, and lower back.</td>
+            <td>
+                <div class="video-container">
+                    <video controls>
+                        <source src="squat.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Machine Calf Rise</td>
+            <td>Legs</td>
+            <td>
+                The machine calf riser targets the calf muscles. You sit, place your feet on the platform, and raise your heels upward.</td>
+            <td>
+                <div class="video-container">
+                    <video controls>
+                        <source src="squat.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Pull Ups</td>
+            <td>Back</td>
+            <td>
+                Pull-ups are a bodyweight exercise where you hang from a bar and pull yourself up until your chin passes the bar. They primarily work the muscles of the back, shoulders, and arms, particularly the latissimus dorsi. Pull-ups are a challenging yet effective way to build upper body strength and muscle definition.</td>
+            <td>
+                <div class="video-container">
+                    <video controls>
+                        <source src="squat.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Bent Over Row</td>
+            <td>Back</td>
+            <td>
+                The bent over row is a weightlifting exercise that targets the muscles of the back, particularly the lats, rhomboids, and lower traps. To perform a bent over row, you bend at the hips while holding a barbell or dumbbells, keeping your back straight and core engaged. Then, you pull the weight towards your lower chest while keeping your elbows close to your body. This exercise helps to build upper body strength and improve posture.</td>
+            <td>
+                <div class="video-container">
+                    <video controls>
+                        <source src="squat.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Sit Ups</td>
+            <td>Core</td>
+            <td>
+                Sit-ups are an abdominal exercise where you lie on your back, bend your knees, and lift your torso toward your thighs, targeting the abdominal muscles.</td>
+            <td>
+                <div class="video-container">
+                    <video controls>
+                        <source src="squat.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Cable Crunch</td>
+            <td>Core</td>
+            <td>
+                Cable crunches are a core exercise performed using a cable machine. You kneel facing away from the machine, grab the cable attachment overhead, and crunch your torso downwards by flexing your spine. This exercise primarily targets the rectus abdominis, helping to strengthen and define the abdominal muscles.</td>
+            <td>
+                <div class="video-container">
+                    <video controls>
+                        <source src="squat.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Wrist Curl</td>
+            <td>Forearms</td>
+            <td>
+                Wrist curls are a forearm exercise where you hold a weight with palms facing up and curl your wrists upward, bringing the weight towards your body. This movement primarily targets the forearm flexor muscles, helping to improve wrist strength and flexibility.</td>
+            <td>
+                <div class="video-container">
+                    <video controls>
+                        <source src="squat.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Reverse Barbell Curl</td>
+            <td>Forearms</td>
+            <td>
+                Reverse barbell curls are a forearm exercise where you hold a barbell with an overhand grip and curl it upward towards your shoulders. This movement primarily targets the forearm extensor muscles, aiding in forearm strength and grip development.</td>
+            <td>
+                <div class="video-container">
+                    <video controls>
+                        <source src="squat.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </td>
+        </tr>
+        <tr>
+        <!-- Add more exercises as needed -->
+        </tbody>
+    </table>
+</div>
+
+<script>
+    function filterTable() {
+        var select = document.getElementById("muscleGroupSelect");
+        var filter = select.value.toUpperCase();
+        var table = document.querySelector(".exercise-table");
+        var tr = table.getElementsByTagName("tr");
+
+        for (var i = 0; i < tr.length; i++) {
+            var td = tr[i].getElementsByTagName("td")[1];
+            if (td) {
+                var txtValue = td.textContent || td.innerText;
+                if (filter === "ALL" || txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"></script>
+
+<footer th:replace="fragments/commons::footer"></footer>
+</body>
+</html>

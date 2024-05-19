@@ -13,7 +13,6 @@ public class UserRegisterBindingModel {
     private Integer height;
     private Integer weight;
 
-
     @NotBlank(message = "Username is required")
     @Size(min = 3, max = 25, message = "Username length must be between 3 and 25 characters!")
     public String getUsername() {

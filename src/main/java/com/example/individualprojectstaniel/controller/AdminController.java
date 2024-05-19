@@ -1,6 +1,8 @@
 package com.example.individualprojectstaniel.controller;
 
 import com.example.individualprojectstaniel.model.dto.UserDTO;
+import com.example.individualprojectstaniel.model.entity.UserRoleEntity;
+import com.example.individualprojectstaniel.repository.UserRoleRepository;
 import com.example.individualprojectstaniel.service.UserService;
 import jakarta.annotation.security.RolesAllowed;
 import org.springframework.stereotype.Controller;
@@ -16,9 +18,11 @@ import java.util.List;
 public class AdminController {
 
     private final UserService userService;
+    private final UserRoleRepository roleRepository;
 
-    public AdminController(UserService userService) {
+    public AdminController(UserService userService, UserRoleRepository roleRepository) {
         this.userService = userService;
+        this.roleRepository = roleRepository;
     }
 
 
@@ -48,7 +52,7 @@ public class AdminController {
         if (userDTO != null) {
             modelAndView.setViewName("changerole");
             modelAndView.addObject("userDTO", userDTO);
-            modelAndView.addObject("roles", List.of("USER", "ADMIN"));
+            modelAndView.addObject("roles", roleRepository.findAll().stream().map(UserRoleEntity::getName).toList());
         } else {
             modelAndView.setViewName("error-page");
         }

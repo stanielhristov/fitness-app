@@ -49,9 +49,19 @@ public class UserController {
             ModelAndView modelAndView = new ModelAndView("register");
 
             modelAndView.addObject("errorMessage", bindingResult.getAllErrors().get(0).getDefaultMessage());
+            modelAndView.addObject("userState", userRegisterBindingModel);
+
             return modelAndView;
         }
-        boolean isRegistered = userService.register(userRegisterBindingModel);
+        boolean isRegistered;
+        try {
+            isRegistered = userService.register(userRegisterBindingModel);
+        } catch (IllegalArgumentException e) {
+            ModelAndView modelAndView = new ModelAndView("register");
+            modelAndView.addObject("errorMessage", e.getMessage());
+            modelAndView.addObject("userState", userRegisterBindingModel);
+            return modelAndView;
+        }
 
         String view = isRegistered ? "redirect:/login" : "register";
 

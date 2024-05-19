@@ -36,6 +36,10 @@ public class UserServiceImpl implements UserService {
             return false;
         }
 
+        if (!userRegisterBindingModel.getPassword().equals(userRegisterBindingModel.getConfirmPassword())) {
+            throw new IllegalArgumentException("Passwords do not match");
+        }
+
         String username = userRegisterBindingModel.getUsername();
 
         if (this.userRepository.findByUsername(username).isPresent()) {
@@ -167,6 +171,14 @@ public class UserServiceImpl implements UserService {
         } else {
             throw new IllegalArgumentException("User not found with ID: " + userId);
         }
+    }
+
+    @Override
+    public Long findUserIdByUsername(String username) {
+        Optional<UserEntity> userOptional = userRepository.findByUsername(username);
+
+        return userOptional.map(UserEntity::getId)
+                .orElseThrow(() -> new IllegalStateException("User not found with username: " + username));
     }
 
     @Override

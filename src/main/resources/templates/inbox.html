@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Inbox</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <style>
+        .btn-action {
+            width: 120px;
+            margin-right: 10px;
+        }
+
+        .btn-delete {
+            background-color: #dc3545;
+            border-color: #dc3545;
+            color: #fff;
+        }
+
+        .btn-update {
+            background-color: #007bff;
+            border-color: #007bff;
+            color: #fff;
+        }
+
+        .fa-icon {
+            margin-right: 5px;
+        }
+
+        .page-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+
+        .page-title i {
+            font-size: 2.5em;
+        }
+
+        .page-title h2 {
+            margin-bottom: 0;
+            margin-left: 10px;
+            font-size: 2em;
+        }
+
+        #confirmationModal {
+            color: #000;
+        }
+
+        #confirmationModal .btn-secondary {
+            background-color: #007bff;
+            border-color: #007bff;
+            color: #fff;
+        }
+
+        .body-column {
+            max-width: 150px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<header th:replace="fragments/commons::header"></header>
+<div class="container">
+    <div class="page-title">
+        <i class="fas fa-inbox"></i>
+        <h2 class="mt-5">Inbox</h2>
+    </div>
+    <a href="/messages/send">
+        <button type="button" class="btn btn-primary mb-3"><i class="fas fa-paper-plane"></i> Send</button>
+    </a>
+    <a href="/messages/sent">
+        <button type="button" class="btn btn-primary mb-3"><i class="fas fa-paper-plane"></i> Sent Messages</button>
+    </a>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th><i class="fas fa-user"></i> From</th>
+            <th><i class="fas fa-envelope"></i> Subject</th>
+            <th><i class="fas fa-file-alt"></i> Body</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="message : ${messages}">
+            <td><i class="fas fa-user"></i> <span th:text="${message.to}"></span></td>
+            <td><i class="fas fa-heartbeat fa-icon"></i> <span th:text="${message.subject}"></span></td>
+            <td class="body-column"><i class="far fa-file-alt fa-icon"></i> <span th:text="${#strings.length(message.body) > 10} ? ${message.body.substring(0, 10) + '...'} : ${message.body}"></span></td>
+            <td>
+                <form th:action="@{/messages/view/{id}(id=${message.id})}" method="get" style="display: inline;"
+                      id="updateForm">
+                    <a th:href="@{/messages/view/{id}(id=${message.id})}">
+                        <button type="button" class="btn btn-primary mt-2 btn-action btn-update">
+                            <i class="fas fa-edit fa-icon"></i> View
+                        </button>
+                    </a>
+                </form>
+                <form th:action="@{/messages/inbox/{id}(id=${message.id})}" method="post" style="display: inline;"
+                      id="deleteForm">
+                    <input type="hidden" name="_method" value="DELETE"/>
+                    <button type="submit" class="btn btn-danger mt-2 btn-action btn-delete">
+                        <i class="fas fa-trash fa-icon"></i> Delete
+                    </button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<footer th:replace="fragments/commons::footer"></footer>
+</body>
+</html>

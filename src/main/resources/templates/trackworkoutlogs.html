@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Track Workouts</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <style>
+        .btn-action {
+            width: 120px;
+            margin-right: 10px;
+        }
+
+        .btn-delete {
+            background-color: #dc3545;
+            border-color: #dc3545;
+            color: #fff;
+        }
+
+        .btn-update {
+            background-color: #007bff;
+            border-color: #007bff;
+            color: #fff;
+        }
+
+        .fa-icon {
+            margin-right: 5px;
+        }
+
+        .page-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+
+        .page-title i {
+            font-size: 2.5em;
+        }
+
+        .page-title h2 {
+            margin-bottom: 0;
+            margin-left: 10px;
+            font-size: 2em;
+        }
+
+        .icon-text {
+            display: flex;
+            align-items: center;
+        }
+
+        .icon-text i {
+            margin-right: 5px;
+        }
+
+        #confirmationModal {
+            color: #000;
+        }
+
+        #confirmationModal .btn-secondary {
+            background-color: #007bff;
+            border-color: #007bff;
+            color: #fff;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<header th:replace="fragments/commons::header"></header>
+<div class="container">
+    <div class="page-title">
+        <i class="fas fa-dumbbell fa-icon"></i>
+        <h2 class="mt-5">Track Workouts</h2>
+    </div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th><div class="icon-text"><i class="fas fa-calendar-alt fa-icon"></i> Date</div></th>
+            <th><div class="icon-text"><i class="fas fa-clock fa-icon"></i> Time</div></th>
+            <th><div class="icon-text"><i class="fas fa-sticky-note fa-icon"></i> Notes</div></th>
+            <th><div class="icon-text"><i class="fas fa-check-circle fa-icon"></i> Completed</div></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="log : ${workoutlogs}">
+            <td><div class="icon-text"><i class="fas fa-calendar-alt fa-icon"></i> <span th:text="${log.date}"></span></div></td>
+            <td><div class="icon-text"><i class="fas fa-clock fa-icon"></i> <span th:text="${log.time}"></span></div></td>
+            <td><div class="icon-text"><i class="fas fa-sticky-note fa-icon"></i> <span th:text="${log.notes}"></span></div></td>
+            <td><div class="icon-text"><i class="fas fa-check-circle fa-icon"></i> <span th:text="${log.isCompleted ? 'Yes' : 'No'}"></span></div></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+
+<footer th:replace="fragments/commons::footer"></footer>
+</body>
+</html>

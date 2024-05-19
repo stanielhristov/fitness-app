@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Registration</title>
@@ -48,7 +48,7 @@
                 <form th:action="@{/register}" method="post">
                     <div class="form-group">
                         <label for="username"><i class="material-icons">person</i> Username</label>
-                        <input type="text" th:name="username" class="form-control" id="username" required>
+                        <input type="text" th:value="${userState == null} ? '' : ${userState.username}" th:name="username" class="form-control" id="username" required>
                     </div>
 
                     <div class="form-group">

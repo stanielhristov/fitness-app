@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flexibility and Mobility Exercises</title>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+
+        .jumbotron {
+            background-color: #007bff;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 0;
+            padding: 2rem 1rem;
+        }
+
+        .exercise-table {
+            margin-top: 20px;
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .exercise-table th, .exercise-table td {
+            border: 1px solid #dee2e6;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .exercise-table th {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .exercise-table tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+        }
+
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<header th:replace="fragments/commons::header"></header>
+
+<div class="jumbotron">
+    <h1 class="display-4">Flexibility and Mobility Exercises</h1>
+    <p class="lead">Enhance your flexibility and mobility</p>
+</div>
+
+<div class="container">
+    <table class="table exercise-table">
+        <thead>
+        <tr>
+            <th>Exercise</th>
+            <th>Description</th>
+            <th>Video</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Yoga</td>
+            <td>Yoga is a practice that combines physical postures, breathing exercises, and meditation to improve flexibility, strength, and mental well-being.</td>
+            <td>
+                <div class="video-container">
+                    <video controls>
+                        <source src="yoga.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Pilates</td>
+            <td>Pilates focuses on core strength, flexibility, and overall body awareness through controlled movements and breathing techniques.</td>
+            <td>
+                <div class="video-container">
+                    <video controls>
+                        <source src="pilates.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Stretching</td>
+            <td>Stretching exercises improve flexibility and range of motion by lengthening muscles and reducing muscle tension.</td>
+            <td>
+                <div class="video-container">
+                    <video controls>
+                        <source src="stretching.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Foam Rolling</td>
+            <td>Foam rolling is a form of self-myofascial release that helps reduce muscle tightness and improve flexibility by applying pressure to targeted areas with a foam roller.</td>
+            <td>
+                <div class="video-container">
+                    <video controls>
+                        <source src="foam-rolling.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </td>
+        </tr>
+        <!-- Add more exercises as needed -->
+        </tbody>
+    </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"></script>
+
+<footer th:replace="fragments/commons::footer"></footer>
+</body>
+</html>

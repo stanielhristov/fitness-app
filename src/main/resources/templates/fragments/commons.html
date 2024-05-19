@@ -38,6 +38,7 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+<!--        TODO Add Clients ONLY for Trainer role -->
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item" th:if="${#authorization.expression('!isAuthenticated()')}">
@@ -50,19 +51,32 @@
                     <a class="nav-link" href="#" th:href="@{/homepage}">Home</a>
                 </li>
                 <li class="nav-item" th:if="${#authorization.expression('isAuthenticated()')}">
-                    <a class="nav-link" href="#" th:href="@{/myprofile}">My Profile</a>
+                    <a class="nav-link" href="#" th:href="@{/myprofile}">Profile</a>
                 </li>
                 <li class="nav-item" th:if="${#authorization.expression('isAuthenticated()')}">
-                    <a class="nav-link" href="#" th:href="@{/bodymeasurementslogs}">My Body Measurements</a>
+                    <a class="nav-link" href="#" th:href="@{/messages/inbox}">Inbox</a>
                 </li>
                 <li class="nav-item" th:if="${#authorization.expression('isAuthenticated()')}">
-                    <a class="nav-link" href="#" th:href="@{/workoutlogs}">My Workouts</a>
+                    <a class="nav-link" href="#" th:href="@{/bodymeasurementslogs}">Body Measurements</a>
                 </li>
                 <li class="nav-item" th:if="${#authorization.expression('isAuthenticated()')}">
-                    <a class="nav-link" href="#" th:href="@{/nutritionlogs}">My Nutritions</a>
+                    <a class="nav-link" href="#" th:href="@{/workoutlogs}">Workouts</a>
+                </li>
+                <li class="nav-item" th:if="${#authorization.expression('isAuthenticated()')}">
+                    <a class="nav-link" href="#" th:href="@{/nutritionlogs}">Nutritions</a>
+                </li>
+                <li class="nav-item" th:if="${#authorization.expression('isAuthenticated()')}">
+                    <a class="nav-link" href="#" th:href="@{/exercises}">Exercises</a>
+                </li>
+                <li class="nav-item" th:if="${#authorization.expression('isAuthenticated()')}">
+                    <a class="nav-link" href="#" th:href="@{/trainers}">Trainers</a>
                 </li>
                 <li class="nav-item" th:if="${#authorization.expression('isAuthenticated()')}">
                     <a class="nav-link" href="#" th:href="@{/bmicalculator}">BMI Calculator</a>
+                </li>
+
+                <li class="nav-item" th:if="${#authorization.expression('hasRole(''ROLE_TRAINER'')')}">
+                    <a class="nav-link" href="#" th:href="@{/clients}">Clients</a>
                 </li>
 
                 <li class="nav-item" th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">

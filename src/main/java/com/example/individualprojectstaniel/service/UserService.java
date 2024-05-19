@@ -19,6 +19,7 @@ public interface UserService {
     List<UserDTO> getAllUsers();
     void deleteUser(Long id);
     void changeRole(Long userId, String newRole);
+    Long findUserIdByUsername(String username);
 
     List<UserDTO> findALl();
 }

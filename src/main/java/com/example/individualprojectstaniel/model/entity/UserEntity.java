@@ -111,4 +111,14 @@ public class UserEntity extends BaseEntity {
         this.weight = weight;
     }
 
+    public boolean hasRole(String role) {
+        List<String> roles = this.roles.stream().map(UserRoleEntity::getName).toList();
+
+        return roles.contains(role);
+    }
+
+    @Transient
+    public boolean isTrainer() {
+        return hasRole(UserRoleEntity.TRAINER_ROLE.getName());
+    }
 }

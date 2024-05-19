@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cardio Exercises</title>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+
+        .jumbotron {
+            background-color: #007bff;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 0;
+            padding: 2rem 1rem;
+        }
+
+        .exercise-table {
+            margin-top: 20px;
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .exercise-table th, .exercise-table td {
+            border: 1px solid #dee2e6;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .exercise-table th {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .exercise-table tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+
+<header th:replace="fragments/commons::header"></header>
+
+<div class="jumbotron">
+    <h1 class="display-4">Cardio Exercises</h1>
+    <p class="lead">Improve your heart health and burn calories</p>
+</div>
+
+<div class="container">
+    <table class="table exercise-table">
+        <thead>
+        <tr>
+            <th>Exercise</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Running</td>
+            <td>Running is a high-impact cardiovascular exercise that improves cardiovascular health, endurance, and burns calories.</td>
+        </tr>
+        <tr>
+            <td>Cycling</td>
+            <td>Cycling is a low-impact exercise that strengthens the legs, improves cardiovascular health, and can be done indoors or outdoors.</td>
+        </tr>
+        <tr>
+            <td>Swimming</td>
+            <td>Swimming is a full-body workout that improves cardiovascular fitness, muscle strength, and flexibility with minimal stress on the joints.</td>
+        </tr>
+        <tr>
+            <td>Jumping Rope</td>
+            <td>Jumping rope is an efficient way to improve cardiovascular fitness, coordination, and agility while burning a high number of calories.</td>
+        </tr>
+        <tr>
+            <td>Elliptical Training</td>
+            <td>Elliptical training is a low-impact exercise that provides a full-body workout, improves cardiovascular health, and strengthens muscles.</td>
+        </tr>
+        <tr>
+            <td>Rowing</td>
+            <td>Rowing is a total-body workout that improves cardiovascular endurance, builds muscle strength, and enhances posture and coordination.</td>
+        </tr>
+        <tr>
+            <td>Hiking</td>
+            <td>Hiking is a great way to get cardio exercise while enjoying nature, improving cardiovascular health, and strengthening muscles.</td>
+        </tr>
+        <tr>
+            <td>Dancing</td>
+            <td>Dancing is a fun way to improve cardiovascular fitness, coordination, and flexibility while burning calories and reducing stress.</td>
+        </tr>
+        <!-- Add more exercises as needed -->
+        </tbody>
+    </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"></script>
+
+<footer th:replace="fragments/commons::footer"></footer>
+</body>
+</html>

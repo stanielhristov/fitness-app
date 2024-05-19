@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clients</title>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
+    <style>
+
+        .btn-space {
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+
+        .icon {
+            margin-right: 5px;
+        }
+
+        .icon-text {
+            display: flex;
+            align-items: center;
+        }
+
+        .btn-fixed-width {
+            width: 150px;
+        }
+
+
+        .blue-title {
+            color: #007bff;
+        }
+
+        .blue-table thead th,
+        .blue-table tbody td {
+            color: #007bff;
+        }
+
+
+    </style>
+</head>
+<body>
+
+<header th:replace="fragments/commons::header"></header>
+
+<div class="container mt-4">
+    <div class="jumbotron">
+        <h1 class="display-4 text-center blue-title"><i class="fas fa-users icon"></i>Clients</h1>
+
+        <table class="table blue-table">
+            <thead>
+            <tr>
+                <th><div class="icon-text"><i class="fas fa-user icon"></i>Name</div></th>
+                <th><div class="icon-text"><i class="fas fa-envelope icon"></i>Email</div></th>
+                <th><div class="icon-text"><i class="fas fa-venus-mars icon"></i>Gender</div></th>
+                <th><div class="icon-text"><i class="fas fa-cogs icon"></i>Actions</div></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="client : ${clients}" th:id="'clientRow-' + ${client.id}">
+                <td th:text="${client.username()}"></td>
+                <td th:text="${client.email()}"></td>
+                <td th:text="${client.gender()}"></td>
+                <td>
+
+
+                    <a class="btn btn-primary btn-space btn-fixed-width" th:href="@{/clients/tracknutritions/{id}(id=${client.id})}" role="button">
+                        <div class="icon-text"><i class="fas fa-apple-alt icon"></i>Track Nutritions</div>
+                    </a>
+
+                    <a class="btn btn-primary btn-space btn-fixed-width" th:href="@{/clients/trackbodymeasurements/{id}(id=${client.id})}" role="button">
+                        <div class="icon-text"><i class="fas fa-ruler icon"></i>Track BodyMeasurements</div>
+                    </a>
+
+                    <a class="btn btn-primary btn-space btn-fixed-width" th:href="@{/clients/trackworkouts/{id}(id=${client.id})}" role="button">
+                        <div class="icon-text"><i class="fas fa-ruler icon"></i>Track Workouts</div>
+                    </a>
+
+
+                    <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                    <button type="button" class="btn btn-primary" onclick="submitForm()">Confirm</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form id="trainForm" th:action="@{'/clients/trainwith/' + ${client.id}}" method="post" style="display: none;">
+                        <input type="hidden" name="id" th:value="${client.id}">
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+<footer th:replace="fragments/commons::footer"></footer>
+</body>
+</html>

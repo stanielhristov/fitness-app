@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Track Body Measurements Log</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <style>
+        .btn-action {
+            width: 120px;
+            margin-right: 10px;
+        }
+
+        .btn-delete {
+            background-color: #dc3545;
+            border-color: #dc3545;
+            color: #fff;
+        }
+
+        .btn-update {
+            background-color: #007bff;
+            border-color: #007bff;
+            color: #fff;
+        }
+
+        .fa-icon {
+            margin-right: 5px;
+        }
+
+        .page-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+
+        .page-title i {
+            font-size: 2.5em;
+        }
+
+        .page-title h2 {
+            margin-bottom: 0;
+            margin-left: 10px;
+            font-size: 2em;
+        }
+
+        #confirmationModal {
+            color: #000;
+        }
+
+        #confirmationModal .btn-secondary {
+            background-color: #007bff;
+            border-color: #007bff;
+            color: #fff;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<header th:replace="fragments/commons::header"></header>
+<div class="container">
+    <div class="page-title">
+        <i class="fas fa-heartbeat fa-icon"></i>
+        <h2 class="mt-5">Track Body Measurements Log</h2>
+    </div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th><i class="fas fa-calendar-alt fa-icon"></i> Date</th>
+            <th><i class="fas fa-heartbeat fa-icon"></i> Body Part</th>
+            <th><i class="fas fa-ruler-horizontal fa-icon"></i> Size (in cm)</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="log : ${bodymeasurementslogs}">
+            <td><i class="fas fa-calendar-alt fa-icon"></i> <span th:text="${log.date}"></span></td>
+            <td><i class="fas fa-heartbeat fa-icon"></i> <span th:text="${log.bodyPart}"></span></td>
+            <td><i class="fas fa-ruler-horizontal fa-icon"></i> <span th:text="${log.size}"></span></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmationModalLabel">Confirm Deletion</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<footer th:replace="fragments/commons::footer"></footer>
+</body>
+</html>
